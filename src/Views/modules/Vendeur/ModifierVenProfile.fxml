@@ -1,0 +1,187 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import com.jfoenix.controls.JFXDatePicker?>
+<?import com.jfoenix.controls.JFXPasswordField?>
+<?import com.jfoenix.controls.JFXRadioButton?>
+<?import com.jfoenix.controls.JFXTextField?>
+<?import de.jensd.fx.glyphs.materialdesignicons.MaterialDesignIconView?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.Group?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Separator?>
+<?import javafx.scene.control.ToggleGroup?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane id="AnchorPane" fx:id="parentPane" prefHeight="640.0" prefWidth="781.0" stylesheets="@../../custom.css" xmlns="http://javafx.com/javafx/8.0.121" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Views.modules.Vendeur.ModifierVenProfileController">
+    <children>
+        <AnchorPane layoutX="41.0" layoutY="44.0" prefHeight="529.0" prefWidth="332.0" styleClass="card-white">
+            <children>
+                <GridPane layoutX="14.0" layoutY="44.0" prefHeight="443.0" prefWidth="299.0">
+                    <columnConstraints>
+                        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" />
+                    </columnConstraints>
+                    <rowConstraints>
+                        <RowConstraints minHeight="10.0" vgrow="SOMETIMES" />
+                        <RowConstraints minHeight="10.0" vgrow="SOMETIMES" />
+                        <RowConstraints minHeight="10.0" vgrow="SOMETIMES" />
+                        <RowConstraints minHeight="10.0" vgrow="SOMETIMES" />
+                        <RowConstraints minHeight="10.0" vgrow="SOMETIMES" />
+                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                        <RowConstraints />
+                        <RowConstraints />
+                    </rowConstraints>
+                    <children>
+                        <JFXTextField fx:id="txtUsername" focusColor="#2196f3" labelFloat="true" maxWidth="295.0" minWidth="224.0" prefHeight="38.0" prefWidth="195.0" promptText="Username" GridPane.rowIndex="0">
+                            <font>
+                                <Font name="Roboto Medium" size="14.0" />
+                            </font>
+                        </JFXTextField>
+
+                        <JFXPasswordField fx:id="txtPassword" focusColor="#2196f3" labelFloat="true" maxWidth="295.0" minWidth="224.0" prefHeight="38.0" prefWidth="295.0" promptText="Mot de passe" GridPane.rowIndex="1">
+                            <font>
+                                <Font name="Roboto Medium" size="14.0" />
+                            </font>
+                        </JFXPasswordField>
+
+
+                        <JFXTextField fx:id="txtFname" focusColor="#2196f3" labelFloat="true" maxWidth="295.0" minWidth="224.0" prefHeight="38.0" prefWidth="295.0" promptText="prenom" GridPane.rowIndex="2">
+                            <font>
+                                <Font name="Roboto Medium" size="14.0" />
+                            </font></JFXTextField>
+                        <JFXTextField fx:id="txtLname" focusColor="#2196f3" labelFloat="true" maxWidth="289.0" minWidth="224.0" prefHeight="38.0" prefWidth="289.0" promptText="nom" GridPane.rowIndex="3">
+                            <font>
+                                <Font name="Roboto Medium" size="14.0" />
+                            </font></JFXTextField>
+                        <JFXTextField fx:id="txtMobile" focusColor="#2196f3" labelFloat="true" maxWidth="284.0" minWidth="224.0" prefHeight="38.0" prefWidth="284.0" promptText="Numero tél" GridPane.rowIndex="4">
+                            <font>
+                                <Font name="Roboto Medium" size="14.0" />
+                            </font></JFXTextField>
+                        <JFXTextField fx:id="txtEmail" focusColor="#2196f3" labelFloat="true" maxWidth="288.0" minWidth="224.0" prefHeight="38.0" prefWidth="288.0" promptText="Addresse email" GridPane.rowIndex="5">
+                            <font>
+                                <Font name="Roboto Medium" size="14.0" />
+                            </font>
+                        </JFXTextField>
+                        <JFXTextField fx:id="txtLocation" focusColor="#2196f3" labelFloat="true" maxWidth="294.0" minWidth="224.0" prefHeight="38.0" prefWidth="294.0" promptText="Adresse physique" GridPane.rowIndex="6">
+                            <font>
+                                <Font name="Roboto Medium" size="14.0" />
+                            </font></JFXTextField>
+                    </children>
+                </GridPane>
+                <Pane layoutX="14.0" layoutY="-25.0" prefHeight="51.0" prefWidth="186.0" style="-fx-effect: dropshadow(gaussian, rgb(0.0, 0.0, 0.0, 0.15), 6.0, 0.7, 0.0,1.5); -fx-background-radius: 4; -fx-background-color: rgb(20, 95, 183,0.6);">
+                    <children>
+                        <Label layoutX="24.0" layoutY="8.0" prefHeight="35.0" prefWidth="150.0" text="Modifier Informations" textFill="WHITE">
+                            <font>
+                                <Font name="Roboto Medium" size="14.0" />
+                            </font>
+                        </Label>
+                    </children>
+                </Pane>
+
+                <VBox layoutX="17.0" layoutY="487.0" prefHeight="81.0" prefWidth="299.0">
+                    <children>
+                        <Label styleClass="control-label" text="Gender">
+                            <VBox.margin>
+                                <Insets left="10.0" />
+                            </VBox.margin>
+                        </Label>
+                        <Group>
+                            <children>
+                                <JFXRadioButton fx:id="rdMale" layoutY="14.0" text="Male" textFill="#4d4d4d">
+                                    <font>
+                                        <Font name="Roboto Medium" size="14.0" />
+                                    </font>
+                                    <toggleGroup>
+                                        <ToggleGroup fx:id="gender" />
+                                    </toggleGroup>
+                                </JFXRadioButton>
+                                <JFXRadioButton fx:id="rdFemale" layoutX="121.0" layoutY="14.0" text="Female" textFill="#4d4d4d" toggleGroup="$gender">
+                                    <font>
+                                        <Font name="Roboto Medium" size="14.0" />
+                                    </font>
+                                </JFXRadioButton>
+                            </children>
+                            <VBox.margin>
+                                <Insets left="50.0" />
+                            </VBox.margin>
+                        </Group>
+                    </children>
+                </VBox>
+            </children>
+        </AnchorPane>
+        <AnchorPane layoutX="394.0" layoutY="44.0" prefHeight="568.0" prefWidth="332.0" styleClass="card-white">
+            <children>
+                <VBox layoutX="29.0" layoutY="255.0" prefHeight="81.0" prefWidth="285.0" spacing="10.0">
+                    <children>
+                        <Label prefHeight="2.0" prefWidth="129.0" styleClass="control-label" text="Date naissance" />
+
+
+                        <JFXDatePicker fx:id="dob" prefHeight="12.0" prefWidth="285.0" promptText="Date of Birth" style="-fx-text-fill: #CDCDCD;">
+
+                        </JFXDatePicker>
+
+                    </children>
+                </VBox>
+                <ImageView fx:id="img" fitHeight="150.0" fitWidth="200.0" layoutX="72.0" layoutY="36.0" pickOnBounds="true" preserveRatio="false">
+                    <Image url="@../../icons/something.jpg" />
+                </ImageView>
+
+                <JFXButton fx:id="ajout" buttonType="RAISED" layoutX="97.0" layoutY="197.0" mnemonicParsing="false" onAction="#ChangeImg" prefHeight="35.0" prefWidth="150.0" ripplerFill="#f52020" style="-fx-background-color: #F39C12;" text="Changer image" textFill="WHITE">
+                    <font>
+                        <Font name="Roboto Medium" size="15.0" />
+                    </font>
+                </JFXButton>
+
+                <Separator layoutX="20.0" layoutY="356.0" prefHeight="18.0" prefWidth="299.0" />
+                <HBox layoutX="14.0" layoutY="507.0" prefHeight="38.0" prefWidth="307.0" spacing="6.0">
+                    <children>
+                        <JFXButton fx:id="btnClear" buttonType="RAISED" prefHeight="35.0" prefWidth="106.0" ripplerFill="#f52020" style="-fx-background-color: #F39C12;" text="Annuler" textFill="WHITE">
+                            <font>
+                                <Font name="Roboto Medium" size="15.0" />
+                            </font>
+                        </JFXButton>
+                        <JFXButton fx:id="btnSave" buttonType="RAISED" onAction="#ModifUser" prefHeight="35.0" prefWidth="116.0" ripplerFill="#3f25d7" style="-fx-background-color: rgb(0, 170, 207);" text="Modifier" textFill="WHITE">
+                            <font>
+                                <Font name="Roboto Medium" size="15.0" />
+                            </font>
+                            <graphic>
+                                <MaterialDesignIconView fill="WHITE" glyphName="CHECK_ALL" size="18.0" wrappingWidth="22.0" />
+                            </graphic>
+                        </JFXButton>
+                        <JFXButton fx:id="btnSupp" buttonType="RAISED" layoutX="122.0" layoutY="10.0" onAction="#deleteUser" prefHeight="35.0" prefWidth="106.0" ripplerFill="#9d2901" style="-fx-background-color: rgb(209,72,44);" text="effacer" textFill="WHITE">
+                            <font>
+                                <Font name="Roboto Medium" size="15.0" />
+                            </font>
+                            <graphic>
+                                <MaterialDesignIconView fill="WHITE" glyphName="CHECK_ALL" size="18.0" wrappingWidth="22.0" />
+                            </graphic>
+                        </JFXButton>
+                    </children>
+                </HBox>
+            <JFXTextField fx:id="txtNomBout" focusColor="#2196f3" labelFloat="true" layoutX="9.0" layoutY="397.0" maxWidth="326.0" minWidth="224.0" prefHeight="38.0" prefWidth="318.0" promptText="Nom Boutique">
+               <font>
+                  <Font name="Roboto Medium" size="14.0" />
+               </font>
+            </JFXTextField>
+            <JFXTextField fx:id="txtDescBout" focusColor="#2196f3" labelFloat="true" layoutX="9.0" layoutY="456.0" maxWidth="326.0" minWidth="224.0" prefHeight="38.0" prefWidth="318.0" promptText="Description Boutique">
+               <font>
+                  <Font name="Roboto Medium" size="14.0" />
+               </font>
+            </JFXTextField>
+
+            </children>
+        </AnchorPane>
+    </children>
+
+
+</AnchorPane>

@@ -1,0 +1,189 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.control.Separator?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+<?import javafx.scene.text.TextFlow?>
+<?import org.controlsfx.control.Rating?>
+
+<AnchorPane prefHeight="1000.0" prefWidth="1920.0" xmlns="http://javafx.com/javafx/8.0.121" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Views.modules.Article.ArticleDetails">
+
+
+    <ScrollPane fx:id="acscroll" maxHeight="Infinity" maxWidth="Infinity" prefHeight="1000" prefWidth="1920.0">
+        <AnchorPane fx:id="holderPane" maxHeight="Infinity" maxWidth="Infinity" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+
+
+        <AnchorPane id="radd" layoutX="426.0" layoutY="10.0" maxHeight="Infinity" maxWidth="Infinity" prefHeight="586.0" prefWidth="929.0" style="-fx-background-color: rgba(0,0,0,0.11) ; -fx-background-radius: 14.0">
+
+
+            <ImageView fx:id="imageArt" fitHeight="539.0" fitWidth="703.0" layoutX="187.0" layoutY="24.0" preserveRatio="false">
+                <image>
+                    <Image url="@../../icons/something.jpg" />
+                </image>
+
+            </ImageView>
+
+
+            <GridPane fx:id="gridImages" alignment="CENTER_RIGHT" layoutX="-46.0" layoutY="11.0" prefHeight="541.0" prefWidth="219.0">
+
+            </GridPane>
+
+        </AnchorPane>
+
+
+
+
+
+            <Separator layoutX="578.0" layoutY="720.0" prefHeight="18.0" prefWidth="786.0" />
+
+
+            <Separator layoutX="837.0" layoutY="604.0" orientation="VERTICAL" prefHeight="116.0" prefWidth="215.0" />
+
+
+
+            <TextFlow layoutX="591.0" layoutY="760.0" maxHeight="246.0" prefWidth="735.0" />
+            <Text layoutX="1063.0" layoutY="630.0" style="-fx-font-size:18" text="Il y a 1 heure " wrappingWidth="135.400390625" />
+
+
+
+            <JFXButton fx:id="btnPanier" buttonType="RAISED" layoutX="1453.0" layoutY="759.0" mnemonicParsing="false" onAction="#addToPanier" prefHeight="52.0" prefWidth="286.0" ripplerFill="#f52020" style="-fx-background-color: #f39c12 ; -fx-font-weight: bold ;                " text="  Ajouter au panier" textFill="WHITE">
+                <font>
+                    <Font name="Roboto Medium" size="20.0" />
+                </font>
+
+                <graphic>
+                    <ImageView fitHeight="30.0" fitWidth="30.0">
+                        <image>
+                            <Image url="@/Views/icons/shopping.png" />
+                        </image>
+                    </ImageView>
+                </graphic>
+            </JFXButton>
+
+
+
+            <AnchorPane id="radd" layoutX="1422.0" layoutY="89.0" maxHeight="Infinity" maxWidth="Infinity" prefHeight="633.0" prefWidth="355.0"
+                        styleClass="card-white" style="-fx-background-color: rgba(0,0,0,0.11) ; -fx-background-radius: 14.0">
+
+
+                <ImageView fx:id="imageVen" fitHeight="200.0" fitWidth="278.0" layoutX="47.0" layoutY="30.0" preserveRatio="true" style="-fx-background-radius: 40">
+                    <image>
+                        <Image url="@../../icons/something.jpg" />
+                    </image>
+
+                </ImageView>
+
+
+
+
+
+
+                <Text fx:id="note" layoutX="19.0" layoutY="298.0" style="-fx-font-size:18" text="Note: " wrappingWidth="224.20703125" />
+                <Text fx:id="nomVen" layoutX="19.0" layoutY="258.0" style="-fx-font-size:18" text="Nom Vendeur" wrappingWidth="144.400390625" />
+
+                <JFXButton fx:id="btnContact" buttonType="RAISED" layoutX="34.0" layoutY="529.0" mnemonicParsing="false" prefHeight="52.0" prefWidth="278.0" ripplerFill="#f52020" style="-fx-background-color: #78b6f3 ; -fx-font-weight: bold ;                    " text="  Contacter Boutique" textFill="WHITE">
+                    <font>
+                        <Font name="Roboto Medium" size="20.0" />
+                    </font>
+
+                    <graphic>
+                        <ImageView fitHeight="30.0" fitWidth="30.0">
+                            <image>
+                                <Image url="@/Views/icons/shopping.png" />
+                            </image>
+                        </ImageView>
+                    </graphic>
+                </JFXButton>
+                <Text layoutX="19.0" layoutY="336.0" style="-fx-font-size:18" text="Num Tel" wrappingWidth="144.400390625" />
+
+
+
+            </AnchorPane>
+            <Text fx:id="txtCat" layoutX="1063.0" layoutY="689.0" style="-fx-font-size:18" text="Categorie" wrappingWidth="106.400390625" />
+            <Text fx:id="txtAdr" layoutX="1062.0" layoutY="661.0" style="-fx-font-size:18" text="Tunis ,Tunisie" wrappingWidth="284.20703125" />
+            <Text fx:id="txtNom" layoutX="591.0" layoutY="641.0" style=" -fx-font-size: 30" text="Nom Article" />
+            <Text fx:id="txtPrix" layoutX="591.0" layoutY="688.0" style="-fx-font-weight: bold ; -fx-font-size: 30" text="Price" />
+
+
+
+            <GridPane fx:id="greadpane" alignment="CENTER_RIGHT" layoutX="417.0" layoutY="733.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308">
+                <children>
+
+
+                    <AnchorPane prefHeight="0.0" prefWidth="981.0" GridPane.columnIndex="1" GridPane.rowIndex="0" GridPane.valignment="TOP" GridPane.vgrow="ALWAYS">
+
+                        <TextFlow layoutX="177.0" layoutY="2.0">
+                            <Text fx:id="txtDesc" style=" -fx-font-size: 16; -fx-stroke: rgba(0,0,0,0.39)" text="Description Article " wrappingWidth="254.6533203125" />
+                        </TextFlow>
+                    </AnchorPane>
+
+
+
+                    <AnchorPane maxHeight="78.0" prefHeight="78.0" prefWidth="981.0" GridPane.columnIndex="1" GridPane.rowIndex="1" GridPane.valignment="TOP">
+                        <Separator layoutX="161.0" layoutY="-6.0" prefHeight="26.0" prefWidth="789.0" />
+
+                        <ImageView fx:id="imgMe" fitHeight="77.0" fitWidth="92.0" layoutX="167.0" layoutY="14.0">
+                            <image>
+                                <Image url="@/Views/icons/something.jpg" />
+                            </image>
+                        </ImageView>
+
+
+                        <Rating fx:id="rating" layoutX="251.0" layoutY="6.0" prefHeight="32.0" prefWidth="128.0" scaleX="0.7" scaleY="0.7">
+
+                        </Rating>
+
+                        <TextArea fx:id="txtComment" layoutX="275.0" layoutY="39.0" prefHeight="53.0" prefWidth="676.0" promptText="Ecrire un commentaire" />
+
+                            <JFXButton fx:id="btnComment" buttonType="RAISED" layoutX="791.0" layoutY="96.0" mnemonicParsing="false" onAction="#AddComment" prefHeight="0.0" prefWidth="156.0" ripplerFill="#f52020" style="-fx-background-color: #78b6f3 ; -fx-font-weight: bold ;                                     " text="  Commenter" textFill="WHITE">
+                                <font>
+                                    <Font name="Roboto Medium" size="20.0" />
+                                </font>
+
+                            </JFXButton>
+                    </AnchorPane>
+
+
+                    <AnchorPane prefHeight="1000.0" prefWidth="981.0" GridPane.columnIndex="1" GridPane.rowIndex="2" GridPane.vgrow="ALWAYS">
+                    <GridPane fx:id="gridComm" alignment="CENTER_RIGHT" prefHeight="1.0" prefWidth="981.0">
+
+                    </GridPane>
+                    </AnchorPane>
+
+
+                </children>
+                <columnConstraints>
+                    <ColumnConstraints />
+                    <ColumnConstraints />
+                    <ColumnConstraints maxWidth="0.0" minWidth="0.0" prefWidth="0.0" />
+                    <ColumnConstraints maxWidth="0.0" minWidth="0.0" prefWidth="0.0" />
+                </columnConstraints>
+                <rowConstraints>
+                    <RowConstraints maxHeight="222.0" minHeight="0.0" prefHeight="53.0" vgrow="SOMETIMES" />
+                    <RowConstraints maxHeight="274.0" minHeight="0.0" prefHeight="152.0" />
+
+
+
+
+
+
+
+
+
+                    <RowConstraints fx:id="rowMokrez" maxHeight="-Infinity" minHeight="0.0" prefHeight="34.0" valignment="TOP" vgrow="NEVER" />
+                </rowConstraints>
+            </GridPane>
+
+        </AnchorPane>
+    </ScrollPane>
+
+</AnchorPane>

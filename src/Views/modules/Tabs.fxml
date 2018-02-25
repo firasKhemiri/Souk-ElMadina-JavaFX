@@ -1,0 +1,227 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import com.jfoenix.controls.JFXComboBox?>
+<?import com.jfoenix.controls.JFXSlider?>
+<?import com.jfoenix.controls.JFXTabPane?>
+<?import com.jfoenix.controls.JFXTextField?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.control.Tab?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<BorderPane layoutX="60" prefHeight="883.0" prefWidth="1512.0" xmlns="http://javafx.com/javafx/8.0.121" xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="Views.modules.Tabs" stylesheets="/Views/custom.css">
+    <center>
+        <JFXTabPane fx:id="tabPane" layoutY="100" tabMinWidth="300">
+
+
+            <Tab fx:id="articles" text="                                               Articles                                              ">
+
+
+                <AnchorPane id="main" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="883.0" prefWidth="1612.0">
+                    <children>
+
+                        <ScrollPane fx:id="acscroll" maxHeight="Infinity" maxWidth="Infinity" prefHeight="1000" prefWidth="1720.0">
+                            <AnchorPane fx:id="holderPane" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
+                        </ScrollPane>
+
+
+
+                        <AnchorPane id="art" layoutX="1220.0" layoutY="144.0" prefHeight="569.0" prefWidth="332.0" styleClass="card-white">
+                            <children>
+                                <GridPane layoutX="14.0" layoutY="44.0" prefHeight="511.0" prefWidth="299.0">
+                                    <columnConstraints>
+                                        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" />
+                                    </columnConstraints>
+                                    <rowConstraints>
+                                        <RowConstraints maxHeight="60.0" minHeight="10.0" prefHeight="57.0" vgrow="SOMETIMES" />
+                                        <RowConstraints maxHeight="70.0" minHeight="10.0" prefHeight="70.0" vgrow="SOMETIMES" />
+                                        <RowConstraints maxHeight="112.0" minHeight="10.0" prefHeight="65.0" vgrow="SOMETIMES" />
+                                        <RowConstraints maxHeight="123.0" minHeight="10.0" prefHeight="59.0" vgrow="SOMETIMES" />
+                                        <RowConstraints maxHeight="132.0" minHeight="10.0" prefHeight="52.0" vgrow="SOMETIMES" />
+                                        <RowConstraints maxHeight="143.0" minHeight="10.0" prefHeight="62.0" vgrow="SOMETIMES" />
+                                        <RowConstraints maxHeight="132.0" minHeight="10.0" prefHeight="58.0" vgrow="SOMETIMES" />
+                                        <RowConstraints maxHeight="71.0" minHeight="40.0" prefHeight="71.0" />
+                              <RowConstraints maxHeight="0.0" minHeight="0.0" prefHeight="0.0" />
+                                    </rowConstraints>
+                                    <children>
+
+                                        <JFXTextField fx:id="txtNomArt" labelFloat="true" layoutX="353.0" layoutY="42.0" maxWidth="295.0" minWidth="224.0" prefHeight="38.0" prefWidth="295.0" promptText="Nom d'article" GridPane.rowIndex="0">
+                                            <font>
+                                                <Font name="Roboto Black" size="13.0" />
+                                            </font>
+                                        </JFXTextField>
+
+                                        <JFXComboBox fx:id="cmbCategorie" maxWidth="309.0" minWidth="224.0" prefHeight="56.0" prefWidth="299.0" promptText="Categories" GridPane.rowIndex="4" />
+
+
+                                        <VBox maxWidth="295.0" minWidth="224.0" prefHeight="38.0" prefWidth="295.0" GridPane.rowIndex="1">
+
+                                            <Label fx:id="lblPrixMin" contentDisplay="CENTER" layoutX="26.0" layoutY="359.0" prefHeight="28.0" prefWidth="127.0" styleClass="control-label" text="Prix min: 0 dt" textAlignment="CENTER">
+                                                <font>
+                                                    <Font size="18.0" />
+                                                </font>
+
+                                                <VBox.margin>
+                                                    <Insets left="10.0" />
+                                                </VBox.margin>
+                                    <opaqueInsets>
+                                       <Insets />
+                                    </opaqueInsets></Label>
+
+                                            <JFXSlider fx:id="sldPrixMin" blockIncrement="50" max="1000" maxWidth="295.0" min="0" minWidth="224.0" prefHeight="38.0" prefWidth="295.0">
+                                            </JFXSlider>
+
+                                        </VBox>
+
+
+
+                                        <VBox maxWidth="295.0" minWidth="224.0" prefHeight="38.0" prefWidth="295.0" GridPane.rowIndex="2">
+
+                                            <Label fx:id="lblPrixMax" contentDisplay="CENTER" layoutX="26.0" layoutY="359.0" prefHeight="2.0" prefWidth="129.0" styleClass="control-label" text="Prix max: 1000 dt" textAlignment="CENTER">
+                                                <font>
+                                                    <Font size="18.0" />
+                                                </font>
+
+
+                                                <VBox.margin>
+                                                    <Insets left="10.0" right="15.0" />
+                                                </VBox.margin></Label>
+
+                                            <JFXSlider fx:id="sldPrixMax" blockIncrement="50" max="1000" maxWidth="295.0" min="0" minWidth="224.0" prefHeight="38.0" prefWidth="295.0">
+                                            </JFXSlider>
+
+                                        </VBox>
+
+
+
+                                        <JFXTextField fx:id="txtVen" focusColor="#2196f3" labelFloat="true" maxWidth="284.0" minWidth="224.0" prefHeight="38.0" prefWidth="284.0" promptText="Nom boutique" GridPane.rowIndex="3">
+                                            <font>
+                                                <Font name="Roboto Medium" size="14.0" />
+                                            </font></JFXTextField>
+
+                                        <JFXComboBox fx:id="comboTriType" maxWidth="309.0" minWidth="224.0" prefHeight="59.0" prefWidth="299.0" promptText="Trier par:" GridPane.rowIndex="6" />
+
+                                        <JFXComboBox fx:id="comboArtGov" maxWidth="309.0" minWidth="224.0" prefHeight="56.0" prefWidth="299.0" promptText="Gouvernorat" GridPane.rowIndex="5" />
+
+
+                                        <JFXButton fx:id="btnSearchArt" buttonType="RAISED" maxWidth="294.0" minWidth="224.0" onAction="#searchArticles" prefHeight="38.0" prefWidth="294.0" ripplerFill="#f52020" style="-fx-background-color: #F39C12;" text="Lancer la recherche" textFill="WHITE" GridPane.rowIndex="7">
+                                            <font>
+                                                <Font name="Roboto Medium" size="14.0" />
+                                            </font>
+                                        </JFXButton>
+                                    </children>
+                                </GridPane>
+                                <Pane layoutX="14.0" layoutY="-25.0" prefHeight="51.0" prefWidth="186.0" style="-fx-effect: dropshadow(gaussian, rgb(0.0, 0.0, 0.0), 6.0, 0.7, 0.0,1.5); -fx-background-radius: 4; -fx-background-color: rgb(20, 95, 183,0.6);">
+                                    <children>
+                                        <Label layoutX="29.0" layoutY="8.0" prefHeight="35.0" prefWidth="129.0" text="Rechercher Articles" textFill="WHITE">
+                                            <font>
+                                                <Font name="Roboto Medium" size="14.0" />
+                                            </font>
+                                        </Label>
+                                    </children>
+                                </Pane>
+                            </children>
+                        </AnchorPane>
+
+
+
+
+                    </children>
+                </AnchorPane>
+
+            </Tab>
+
+            <Tab fx:id="vendeurs" text="                                               Vendeurs                                               ">
+
+
+                <AnchorPane id="main" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="883.0" prefWidth="1612.0">
+                    <children>
+
+                        <ScrollPane fx:id="acscroll2" layoutX="30.0" layoutY="20.0" maxHeight="Infinity" maxWidth="Infinity" prefHeight="1000" prefWidth="1720.0">
+                            <AnchorPane fx:id="holderPane2" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
+                        </ScrollPane>
+
+
+
+
+
+                        <AnchorPane id="bot" layoutX="1220.0" layoutY="144.0" prefHeight="529.0" prefWidth="332.0" styleClass="card-white">
+                            <children>
+                                <GridPane layoutX="14.0" layoutY="44.0" prefHeight="443.0" prefWidth="299.0">
+                                    <columnConstraints>
+                                        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" />
+                                    </columnConstraints>
+                                    <rowConstraints>
+                                        <RowConstraints maxHeight="60.0" minHeight="10.0" prefHeight="57.0" vgrow="SOMETIMES" />
+                                        <RowConstraints maxHeight="132.0" minHeight="10.0" prefHeight="55.0" vgrow="SOMETIMES" />
+                                        <RowConstraints maxHeight="196.0" minHeight="10.0" prefHeight="70.0" vgrow="SOMETIMES" />
+                                        <RowConstraints maxHeight="258.0" minHeight="10.0" prefHeight="258.0" vgrow="SOMETIMES" />
+                                        <RowConstraints />
+                                        <RowConstraints />
+                                    </rowConstraints>
+                                    <children>
+                                        <JFXTextField fx:id="txtNomVen" focusColor="#2196f3" labelFloat="true" maxWidth="295.0" minWidth="224.0" prefHeight="38.0" prefWidth="295.0" promptText="Nom boutique" GridPane.rowIndex="0">
+                                            <font>
+                                                <Font name="Roboto Medium" size="14.0" />
+                                            </font>
+                                        </JFXTextField>
+
+                                        <JFXComboBox fx:id="comboVenGov" maxWidth="309.0" minWidth="224.0" prefHeight="56.0" prefWidth="299.0" promptText="Gouvernorat" GridPane.rowIndex="1" />
+
+                                        <JFXComboBox fx:id="comboVenType" maxWidth="309.0" minWidth="224.0" prefHeight="56.0" prefWidth="299.0" promptText="Type Vendeur" GridPane.rowIndex="2" />
+
+                                        <JFXButton fx:id="btnSearchVen" buttonType="RAISED" maxWidth="294.0" minWidth="224.0" onAction="#searchVendeurs" prefHeight="38.0" prefWidth="294.0" ripplerFill="#f52020" style="-fx-background-color: #F39C12;" text="Lancer la recherche" textFill="WHITE" GridPane.rowIndex="3">
+                                            <font>
+                                                <Font name="Roboto Medium" size="14.0" />
+                                            </font>
+                                        </JFXButton>
+                                    </children>
+                                </GridPane>
+                                <Pane layoutX="14.0" layoutY="-25.0" prefHeight="51.0" prefWidth="186.0" style="-fx-effect: dropshadow(gaussian, rgb(0.0, 0.0, 0.0), 6.0, 0.7, 0.0,1.5); -fx-background-radius: 4; -fx-background-color: rgb(20, 95, 183,0.6);">
+                                    <children>
+                                        <Label layoutX="27.0" layoutY="8.0" prefHeight="35.0" prefWidth="150.0" text="Rechercher Boutiques" textFill="WHITE">
+                                            <font>
+                                                <Font name="Roboto Medium" size="14.0" />
+                                            </font>
+                                        </Label>
+                                    </children>
+                                </Pane>
+                            </children>
+                        </AnchorPane>
+
+
+
+
+
+
+
+
+
+
+                    </children>
+                </AnchorPane>
+
+
+            </Tab>
+
+            <Tab fx:id="Evenements" text="                                             Evenements                                             ">
+
+                <ScrollPane fx:id="acscroll3" maxHeight="Infinity" maxWidth="Infinity" prefWidth="6000">
+                    <AnchorPane fx:id="holderPane3" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
+                </ScrollPane>
+
+            </Tab>
+
+        </JFXTabPane>
+    </center>
+   </BorderPane>

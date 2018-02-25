@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<AnchorPane xmlns="http://javafx.com/javafx"
+            xmlns:fx="http://javafx.com/fxml"
+            fx:controller="Views.modules.Article.ArtGridImgItem"
+            prefHeight="80.0" prefWidth="80.0" maxHeight="80" maxWidth="80">
+
+    <ImageView fx:id="boxImage" fitHeight="80.0" fitWidth="80.0"  preserveRatio="false">
+        <image>
+            <Image url="@../../icons/something.jpg" />
+        </image>
+
+    </ImageView>
+
+</AnchorPane>

@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Separator?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Text?>
+<?import javafx.scene.text.TextFlow?>
+<?import org.controlsfx.control.Rating?>
+
+<AnchorPane prefHeight="40.0" prefWidth="980.0" xmlns="http://javafx.com/javafx/8.0.121" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Views.modules.Comments.CommentItem">
+
+    <Separator layoutX="160.0" layoutY="-10.0" prefHeight="15.0" prefWidth="789.0" />
+
+
+    <ImageView fx:id="imgUser" fitHeight="77.0" fitWidth="92.0" layoutX="167.0" layoutY="14.0">
+        <image>
+            <Image url="@/Views/icons/something.jpg" />
+        </image>
+    </ImageView>
+
+    <Rating fx:id="rating" layoutX="649.0" layoutY="8.0" scaleX="0.7" scaleY="0.7" disable="true">
+        
+    </Rating>
+
+    <TextFlow layoutX="818.0" layoutY="13.0" maxWidth="500" prefHeight="22.0" prefWidth="148.0" textAlignment="RIGHT">
+      <children>
+           <Text fx:id="txtDate" style=" -fx-font-size: 16; -fx-stroke: rgba(0,0,0,0.39)" text="Date commentaire " wrappingWidth="159.5" />
+      </children>
+    </TextFlow>
+
+
+    <TextFlow layoutX="273.0" layoutY="13.0" maxWidth="418.0" prefHeight="22.0" prefWidth="418.0">
+      <children>
+           <Text fx:id="txtName" style=" -fx-font-size: 16; -fx-stroke: rgba(0,0,0,0.39)" text="Ach Name " wrappingWidth="254.6533203125" />
+      </children>
+    </TextFlow>
+
+    <TextFlow layoutX="273.0" layoutY="45.0" maxWidth="700" prefWidth="700">
+        <Text fx:id="txtComm" style=" -fx-font-size: 16; -fx-stroke: rgba(0,0,0,0.39)" text="Commentaire " wrappingWidth="254.6533203125" />
+    </TextFlow>
+
+</AnchorPane>
