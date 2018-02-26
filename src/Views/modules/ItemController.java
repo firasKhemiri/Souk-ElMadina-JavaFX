@@ -7,8 +7,10 @@ package Views.modules;
 
 import Controller.CompteVenController;
 import Model.Entities.Article;
+import Views.modules.Article.AddArticle;
 import Views.modules.Article.ArticleDetails;
 import Views.modules.Article.ModifArticle;
+import Views.modules.Vendeur.ProfileVen;
 import javafx.animation.FadeTransition;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -18,6 +20,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.stage.Stage;
 import javafx.util.Duration;
 
 import javax.xml.soap.Text;
@@ -29,6 +32,10 @@ import java.net.URL;
 import java.sql.Blob;
 import java.sql.SQLException;
 import java.util.ResourceBundle;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
+import static Controller.LoginController.statCuser;
 
 /**
  * FXML Controller class
@@ -39,6 +46,7 @@ public class ItemController implements Initializable {
 
     public javafx.scene.text.Text txtName;
     public javafx.scene.text.Text txtPrix;
+    public javafx.scene.text.Text txtStock;
     @FXML
     private ImageView boxImage;
 
@@ -67,6 +75,11 @@ public class ItemController implements Initializable {
         txtName.setText(article.getNom());
 
         txtPrix.setText(String.valueOf(article.getPrix())+" DT");
+
+        if (article.getQuantity()>0)
+        {
+            txtStock.setVisible(false);
+        }
     }
 
 
@@ -141,6 +154,35 @@ public class ItemController implements Initializable {
         else
         {
             try {
+                Stage dashboardStage = new Stage();
+                dashboardStage.setTitle("");
+
+                FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("../modules/Article/ModifArticle.fxml"));
+
+                Parent root = fxmlLoader.load();
+
+                ModifArticle controller = fxmlLoader.getController();
+                controller.intiData(article.getId());
+
+                Scene scene = new Scene(root);
+                dashboardStage.setScene(scene);
+                dashboardStage.show();
+
+                FadeTransition ft = new FadeTransition(Duration.millis(1500));
+                ft.setNode(root);
+                ft.setFromValue(0.1);
+                ft.setToValue(1);
+                ft.setCycleCount(1);
+                ft.setAutoReverse(false);
+                ft.play();
+
+            } catch (IOException ex) {
+                Logger.getLogger(ProfileVen.class.getName()).log(Level.SEVERE, null, ex);
+            }
+
+        }
+            /*
+            try {
 
                 Scene scene = boxImage.getParent().getScene();
 
@@ -167,9 +209,9 @@ public class ItemController implements Initializable {
                 e.printStackTrace();
             }
 
+*/
 
 
-        }
     }
 
 }

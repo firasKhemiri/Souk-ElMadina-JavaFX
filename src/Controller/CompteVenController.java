@@ -14,6 +14,7 @@ import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXRippler;
 import com.jfoenix.controls.JFXTextField;
 import javafx.animation.FadeTransition;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -41,6 +42,7 @@ import java.util.ResourceBundle;
  */
 public class CompteVenController implements Initializable {
 
+    public JFXButton btnSub;
     @FXML
     private Label fabEdit;
     @FXML
@@ -72,6 +74,8 @@ public class CompteVenController implements Initializable {
 
     @FXML
     private ScrollPane acscroll;
+
+    private boolean subbed = false;
 
     int id;
 
@@ -124,10 +128,21 @@ public class CompteVenController implements Initializable {
             Image img = new Image(new ByteArrayInputStream(byteImage));
             picVen.setImage(img);
 
+            picVen.setFitHeight(90);
+            picVen.setFitWidth(90);
+
         } catch (SQLException e) {
             e.printStackTrace();
         }
 
+        subbed = daoVen.isSubbed(ven.getId());
+
+        if (subbed) {
+            btnSub.setText("Désabonner");
+        }
+        else {
+            btnSub.setText("s'abonner");
+        }
 
         setNode(id,articles);
 
@@ -192,5 +207,23 @@ public class CompteVenController implements Initializable {
         setNode(id,articles);
 
     }
+
+    public void gesSubscribe(ActionEvent event) {
+
+        if (subbed)
+        {
+            daoVen.unSubscribe(id);
+            btnSub.setText("s'abonner");
+            subbed = false;
+        }
+        else
+        {
+            daoVen.subscribe(id);
+            btnSub.setText("désabonner");
+            subbed = true;
+        }
+
+    }
+
 
 }

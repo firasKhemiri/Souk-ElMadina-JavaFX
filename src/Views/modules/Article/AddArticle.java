@@ -78,11 +78,15 @@ public class AddArticle implements Initializable{
         a.setNom(txtNom.getText());
         a.setDescription(txtDesc.getText());
         a.setPrix(Integer.valueOf(txtPrix.getText()));
-        a.setOrder_qte(Integer.valueOf(txtQte.getText()));
+        a.setQuantity(Integer.valueOf(txtQte.getText()));
         a.setCategorie(comboCat.getValue());
         a.setImages(listImg);
 
-        daoArt.addArticle(a,vendeur);
+        if (daoArt.addArticle(a,vendeur))
+        {
+            txtQte.getScene().getWindow().hide();
+        }
+
     }
 
     @FXML

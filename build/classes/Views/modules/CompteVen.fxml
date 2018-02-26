@@ -22,18 +22,18 @@
    <children>
       <StackPane prefHeight="680.0" prefWidth="1000.0">
          <children>
-            <AnchorPane fx:id="holderAnchor" prefHeight="200.0" prefWidth="200.0">
+            <AnchorPane fx:id="holderAnchor" prefHeight="1080.0" prefWidth="1920.0">
                <children>
 
 
-                  <ScrollPane fx:id="acscroll" layoutX="100.0" layoutY="173.0" prefHeight="770.0" prefWidth="1206.0">
+                  <ScrollPane fx:id="acscroll" layoutX="300.0" layoutY="183.0" prefHeight="781.0" prefWidth="1245.0">
                      <content>
                         <AnchorPane fx:id="holderPane" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
                      </content>
                   </ScrollPane>
 
 
-                  <AnchorPane layoutX="1332.0" layoutY="173.0" prefHeight="717.0" prefWidth="320.0" styleClass="card-white">
+                  <AnchorPane layoutX="1563.0" layoutY="193.0" prefHeight="717.0" prefWidth="320.0" styleClass="card-white">
                      <children>
                         <StackPane layoutX="5.0" prefHeight="427.0" prefWidth="320.0" AnchorPane.bottomAnchor="141.0" AnchorPane.leftAnchor="5.0" AnchorPane.rightAnchor="-5.0" AnchorPane.topAnchor="0.0">
                            <children>
@@ -41,7 +41,7 @@
                                  <children>
                                     <Pane prefHeight="180.0" prefWidth="320.0">
                                        <children>
-                                          <ImageView fitHeight="180.0" fitWidth="320.0" pickOnBounds="true">
+                                          <ImageView fitHeight="180.0" fitWidth="320.0" layoutX="-4.0" pickOnBounds="true">
                                              <image>
                                                 <Image url="@../icons/background.png" />
                                              </image>
@@ -113,14 +113,7 @@
                                                 </Label>
                                              </children>
                                           </VBox>
-                                       </children></AnchorPane>
-                                 </children>
-                              </VBox>
-                              <AnchorPane prefHeight="564.0" prefWidth="320.0">
-                                 <children>
-                                    <AnchorPane fx:id="fabPane" layoutX="255.0" layoutY="155.0" prefHeight="53.0" prefWidth="51.0">
-                                       <children>
-                                          <Label fx:id="fabEdit" styleClass="fab">
+                                          <Label fx:id="fabEdit" layoutX="255.0" layoutY="-11.0" styleClass="fab">
                                              <graphic>
                                                 <MaterialDesignIconView fill="WHITE" glyphName="BORDER_COLOR" size="26" wrappingWidth="22.666656494140625" />
                                              </graphic>
@@ -128,19 +121,23 @@
                                                 <Insets right="5.0" top="5.0" />
                                              </padding>
                                           </Label>
-                                       </children>
-                                    </AnchorPane>
+                                       </children></AnchorPane>
                                  </children>
-                              </AnchorPane>
+                              </VBox>
                            </children>
                         </StackPane>
+                        <JFXButton fx:id="btnSub" buttonType="RAISED" layoutX="39.0" layoutY="649.0" onAction="#gesSubscribe" prefHeight="35.0" prefWidth="243.0" ripplerFill="#f52020" style="-fx-background-color: #F39C12;" text="S'abonner" textFill="WHITE">
+                           <font>
+                              <Font name="Roboto Medium" size="15.0" />
+                           </font>
+                        </JFXButton>
                      </children>
                   </AnchorPane>
-                  <AnchorPane layoutX="132.0" layoutY="29.0" prefHeight="106.0" prefWidth="1480.0" style="-fx-background-color: rgb(0, 115, 183,0.6); -fx-effect: dropshadow(gaussian, rgb(0.0, 0.0, 0.0, 0.15), 6.0, 0.7, 0.0,1.5); -fx-background-radius: 5;">
+                  <AnchorPane layoutX="301.0" layoutY="69.0" prefHeight="106.0" prefWidth="1581.0" style="-fx-background-color: rgb(0, 115, 183,0.6); -fx-effect: dropshadow(gaussian, rgb(0.0, 0.0, 0.0, 0.15), 6.0, 0.7, 0.0,1.5); -fx-background-radius: 5;">
                      <children>
                         <Pane layoutX="22.0" layoutY="-36.0" prefHeight="106.0" prefWidth="115.0" style="-fx-background-color: #0073B7; -fx-effect: dropshadow(gaussian, rgb(0.0, 0.0, 0.0, 0.15), 6.0, 0.7, 0.0,1.5); -fx-background-radius: 4;">
                            <children>
-                              <ImageView fx:id="picVen" fitHeight="85.0" fitWidth="92.0" layoutX="15.0" layoutY="11.0" pickOnBounds="true" preserveRatio="true">
+                              <ImageView id="imgven" fx:id="picVen" fitHeight="90.0" fitWidth="90.0" layoutX="14.0" layoutY="8.0" pickOnBounds="true" preserveRatio="false">
                                  <image>
                                     <Image url="@../icons/search.png" />
                                  </image>
@@ -185,5 +182,6 @@
             </AnchorPane>
          </children>
       </StackPane>
+
    </children>
 </AnchorPane>

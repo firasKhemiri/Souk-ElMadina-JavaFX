@@ -196,7 +196,10 @@ public class ModifierVenProfileController implements Initializable {
             vendeur.setFile(file);
         }
 
-        userdao.Modifier(vendeur);
+        if (userdao.Modifier(vendeur))
+        {
+            txtDescBout.getScene().getWindow().hide();
+        }
 
     }
 

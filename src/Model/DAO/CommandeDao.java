@@ -51,6 +51,9 @@ public class CommandeDao {
 
             }
 
+            statPanier.getArticleList().clear();
+            new PanierDao().DeleteAllArticles(statPanier);
+
             return true;
         } catch (SQLException ex) {
             Logger.getLogger(ex.getMessage()).log(Level.SEVERE, null, ex);
@@ -138,6 +141,19 @@ public class CommandeDao {
         }
     }
 
+
+
+    public void updateEtat( int id) {
+        try {
+            String req = "UPDATE commande SET etat = FALSE WHERE id =?";
+            PreparedStatement ps = connection.prepareStatement(req);
+            ps.setInt(1, id);
+            ps.executeUpdate();
+        } catch (SQLException ex) {
+            Logger.getLogger(CommandeDao.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+
     public int findTheId() {
 
         int id = 0;
@@ -162,8 +178,9 @@ public class CommandeDao {
 
 
 
-    public Commande vendeurCommandes(int idVen)
+    public List<Commande> vendeurCommandes(int idVen)
     {
+        List<Commande> commandes = new ArrayList<>();
         Commande commande = new Commande();
 
         List<Article> articles = new ArrayList<>();
@@ -173,13 +190,16 @@ public class CommandeDao {
                 "JOIN article a ON ca.article_id = a.id " +
                 "JOIN articles_vendeurs av ON a.id = av.article_id " +
                 "JOIN vendeur v ON av.vendeur_id = v.id " +
-                "where v.id=? GROUP BY ca.article_id,ca.commande_id";
+                "where v.id=? AND c.etat = TRUE GROUP BY ca.commande_id";
         try {
             PreparedStatement ps = connection.prepareStatement(requete);
             ps.setInt(1, idVen);
 
             ResultSet res = ps.executeQuery();
             while (res.next()) {
+
+                commande = new Commande();
+
                 commande.setId(res.getInt("c.id"));
                 commande.setAcheteur(new UserDAO().ChercherAcheteurId(res.getInt("c.acheteur_id")));
                 commande.setAdress_liv(res.getString("c.adress_liv"));
@@ -189,26 +209,23 @@ public class CommandeDao {
                 commande.setDate(res.getDate("c.date"));
                 commande.setEtat(res.getInt("c.etat"));
 
-                Article r = new Article();
 
-                r.setId(res.getInt("a.id"));
-                r.setNom(res.getString("a.nom"));
-                r.setDescription(res.getString("a.description"));
-                r.setCategorie(res.getString("a.categorie"));
-                r.setPrix(res.getFloat("a.prix"));
-                r.setOrder_qte(res.getInt("ca.quantity"));
+                articles = new ArticlesDao().chercherCommandesArt(idVen,commande.getId());
 
-                r.setImages(new ArticlesDao().SelectArticleImg(r.getId()));
+                commande.setArticles(articles);
 
-                articles.add(r);
+                commandes.add(commande);
 
-                System.out.println(r.getId()+"art "+commande.getId()+ " comm");
 
             }
 
-            commande.setArticles(articles);
+            for (Commande commande1 : commandes) {
+                System.out.println("arttt ");
 
-            return commande;
+                for (Article article : commande1.getArticles())
+                    System.out.println(article.getId() + " art " + commande1.getId() + " comm");
+            }
+            return commandes;
 
         } catch (SQLException ex) {
             Logger.getLogger(ex.getMessage()).log(Level.SEVERE, null, ex);

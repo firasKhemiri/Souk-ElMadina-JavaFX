@@ -173,8 +173,13 @@ public class ModifAcheteur implements Initializable {
             user.setFile(file);
         }
 
-        userdao.Modifier(user);
+      //  userdao.Modifier(user);
 
+
+        if (userdao.Modifier(user))
+        {
+            txtFname.getScene().getWindow().hide();
+        }
 
     }
 

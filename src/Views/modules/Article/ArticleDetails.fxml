@@ -1,6 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import com.jfoenix.controls.JFXButton?>
+<?import com.jfoenix.controls.JFXTextField?>
+<?import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView?>
+<?import javafx.geometry.Insets?>
 <?import javafx.scene.control.ScrollPane?>
 <?import javafx.scene.control.Separator?>
 <?import javafx.scene.control.TextArea?>
@@ -50,12 +53,8 @@
 
 
 
-            <TextFlow layoutX="591.0" layoutY="760.0" maxHeight="246.0" prefWidth="735.0" />
-            <Text layoutX="1063.0" layoutY="630.0" style="-fx-font-size:18" text="Il y a 1 heure " wrappingWidth="135.400390625" />
 
-
-
-            <JFXButton fx:id="btnPanier" buttonType="RAISED" layoutX="1453.0" layoutY="759.0" mnemonicParsing="false" onAction="#addToPanier" prefHeight="52.0" prefWidth="286.0" ripplerFill="#f52020" style="-fx-background-color: #f39c12 ; -fx-font-weight: bold ;                " text="  Ajouter au panier" textFill="WHITE">
+            <JFXButton fx:id="btnPanier" buttonType="RAISED" layoutX="1453.0" layoutY="759.0" mnemonicParsing="false" onAction="#addToPanier" prefHeight="52.0" prefWidth="286.0" ripplerFill="#f52020" style="-fx-background-color: #f39c12 ;" text="  Ajouter au panier" textFill="WHITE">
                 <font>
                     <Font name="Roboto Medium" size="20.0" />
                 </font>
@@ -71,8 +70,7 @@
 
 
 
-            <AnchorPane id="radd" layoutX="1422.0" layoutY="89.0" maxHeight="Infinity" maxWidth="Infinity" prefHeight="633.0" prefWidth="355.0"
-                        styleClass="card-white" style="-fx-background-color: rgba(0,0,0,0.11) ; -fx-background-radius: 14.0">
+            <AnchorPane id="radd" layoutX="1422.0" layoutY="89.0" maxHeight="Infinity" maxWidth="Infinity" prefHeight="633.0" prefWidth="355.0" style="-fx-background-color: rgba(0,0,0,0.11) ; -fx-background-radius: 14.0" styleClass="card-white">
 
 
                 <ImageView fx:id="imageVen" fitHeight="200.0" fitWidth="278.0" layoutX="47.0" layoutY="30.0" preserveRatio="true" style="-fx-background-radius: 40">
@@ -90,7 +88,7 @@
                 <Text fx:id="note" layoutX="19.0" layoutY="298.0" style="-fx-font-size:18" text="Note: " wrappingWidth="224.20703125" />
                 <Text fx:id="nomVen" layoutX="19.0" layoutY="258.0" style="-fx-font-size:18" text="Nom Vendeur" wrappingWidth="144.400390625" />
 
-                <JFXButton fx:id="btnContact" buttonType="RAISED" layoutX="34.0" layoutY="529.0" mnemonicParsing="false" prefHeight="52.0" prefWidth="278.0" ripplerFill="#f52020" style="-fx-background-color: #78b6f3 ; -fx-font-weight: bold ;                    " text="  Contacter Boutique" textFill="WHITE">
+                <JFXButton fx:id="btnContact" buttonType="RAISED" layoutX="34.0" layoutY="529.0" mnemonicParsing="false" prefHeight="52.0" prefWidth="278.0" ripplerFill="#f52020" style="-fx-background-color: #78b6f3 ; " text="  Contacter Boutique" textFill="WHITE">
                     <font>
                         <Font name="Roboto Medium" size="20.0" />
                     </font>
@@ -109,8 +107,16 @@
 
             </AnchorPane>
             <Text fx:id="txtCat" layoutX="1063.0" layoutY="689.0" style="-fx-font-size:18" text="Categorie" wrappingWidth="106.400390625" />
+            <FontAwesomeIconView fill="#757575" glyphName="ARCHIVE" layoutX="1035.0" layoutY="691.0" size="24.0" wrappingWidth="30.0" />
+
             <Text fx:id="txtAdr" layoutX="1062.0" layoutY="661.0" style="-fx-font-size:18" text="Tunis ,Tunisie" wrappingWidth="284.20703125" />
+            <FontAwesomeIconView fill="#757575" glyphName="COMPASS" layoutX="1036.0" layoutY="662.0" size="24.0" wrappingWidth="21.0" />
+
+            <Text layoutX="1063.0" layoutY="630.0" style="-fx-font-size:18" text="Il y a 1 heure " wrappingWidth="135.400390625" />
+            <FontAwesomeIconView fill="#757575" glyphName="CALENDAR" layoutX="1035.0" layoutY="631.0" size="24.0" wrappingWidth="30.0" />
+
             <Text fx:id="txtNom" layoutX="591.0" layoutY="641.0" style=" -fx-font-size: 30" text="Nom Article" />
+
             <Text fx:id="txtPrix" layoutX="591.0" layoutY="688.0" style="-fx-font-weight: bold ; -fx-font-size: 30" text="Price" />
 
 
@@ -144,7 +150,7 @@
 
                         <TextArea fx:id="txtComment" layoutX="275.0" layoutY="39.0" prefHeight="53.0" prefWidth="676.0" promptText="Ecrire un commentaire" />
 
-                            <JFXButton fx:id="btnComment" buttonType="RAISED" layoutX="791.0" layoutY="96.0" mnemonicParsing="false" onAction="#AddComment" prefHeight="0.0" prefWidth="156.0" ripplerFill="#f52020" style="-fx-background-color: #78b6f3 ; -fx-font-weight: bold ;                                     " text="  Commenter" textFill="WHITE">
+                            <JFXButton fx:id="btnComment" buttonType="RAISED" layoutX="791.0" layoutY="96.0" mnemonicParsing="false" onAction="#AddComment" prefHeight="0.0" prefWidth="156.0" ripplerFill="#f52020" style="-fx-background-color: #78b6f3 ; " text="  Commenter" textFill="WHITE">
                                 <font>
                                     <Font name="Roboto Medium" size="20.0" />
                                 </font>
@@ -183,6 +189,17 @@
                 </rowConstraints>
             </GridPane>
 
+
+            <Text fx:id="txtStock" fill="darkgrey" layoutX="1482.0" layoutY="849.0" style=" -fx-font-size: 20" text="Reste 5 elements en stock" />
+
+            <JFXTextField fx:id="txtQte" alignment="CENTER" focusColor="#2196f3" labelFloat="true" layoutX="1470.0" layoutY="898.0" maxWidth="326.0" minWidth="224.0" prefHeight="60.0" prefWidth="266.0" promptText="Quantité a commander" unFocusColor="BLACK">
+                <font>
+                    <Font name="Roboto Medium" size="20.0" />
+                </font>
+                <opaqueInsets>
+                    <Insets top="-140.0" />
+                </opaqueInsets>
+            </JFXTextField>
         </AnchorPane>
     </ScrollPane>
 

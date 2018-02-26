@@ -1,5 +1,6 @@
 package Model.DAO;
 
+import Model.Entities.User;
 import Model.Entities.Vendeur;
 
 import java.io.File;
@@ -8,11 +9,13 @@ import java.io.FileNotFoundException;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
+import static Controller.LoginController.statCuser;
 import static java.lang.System.out;
 
 public class VendeurDao {
-
 
 
     private static Connection connecter() {
@@ -28,9 +31,9 @@ public class VendeurDao {
                 Statement st = con.createStatement();
 
                 String requete = "select * from user , vendeur " +
-                        "where user.id = vendeur.id and vendeur.nom_boutique LIKE '%"+nom+"%' and user.state LIKE '%"+gov+"%'";
+                        "where user.id = vendeur.id and vendeur.nom_boutique LIKE '%" + nom + "%' and user.state LIKE '%" + gov + "%'";
 
-                System.out.println(requete+" ");
+                System.out.println(requete + " ");
                 ResultSet res = st.executeQuery(requete);
                 VendeurResultSet(list, res);
 
@@ -44,9 +47,7 @@ public class VendeurDao {
     }
 
 
-
-
-    public List<Vendeur> ChercherVendeursForm(String nom, String gov,String type) {
+    public List<Vendeur> ChercherVendeursForm(String nom, String gov, String type) {
         List<Vendeur> list = new ArrayList<>();
         Connection con;
         if ((con = connecter()) != null) {
@@ -54,9 +55,9 @@ public class VendeurDao {
                 Statement st = con.createStatement();
 
                 String requete = "select * from user , vendeur " +
-                        "where user.id = vendeur.id and vendeur.nom_boutique LIKE '%"+nom+"%' and user.state LIKE '%"+gov+"%' AND vendeur.type LIKE '%"+type+"%'";
+                        "where user.id = vendeur.id and vendeur.nom_boutique LIKE '%" + nom + "%' and user.state LIKE '%" + gov + "%' AND vendeur.type LIKE '%" + type + "%'";
 
-                System.out.println(requete+" ");
+                System.out.println(requete + " ");
                 ResultSet res = st.executeQuery(requete);
                 VendeurResultSet(list, res);
 
@@ -68,7 +69,6 @@ public class VendeurDao {
         }
         return list;
     }
-
 
 
     private void VendeurResultSet(List<Vendeur> list, ResultSet res) throws SQLException {
@@ -88,7 +88,7 @@ public class VendeurDao {
             r.setNote(res.getInt("note"));
             r.setDescription(res.getString("description"));
 
-            System.out.println(res.getInt("id")+" "+res.getString("nom_boutique"));
+            System.out.println(res.getInt("id") + " " + res.getString("nom_boutique"));
 
             list.add(r);
         }
@@ -124,8 +124,6 @@ public class VendeurDao {
 */
 
 
-
-
     public Vendeur ChercherVen(int id) {
         Vendeur r = new Vendeur();
         Connection con;
@@ -139,9 +137,9 @@ public class VendeurDao {
 
                 String requete = "select * from user , vendeur " +
                         "where user.id = vendeur.id and " +
-                        "user.id = '"+ id +"'";
+                        "user.id = '" + id + "'";
 
-                System.out.println(requete+" ");
+                System.out.println(requete + " ");
                 ResultSet res = st.executeQuery(requete);
                 SingleVen(r, res);
 
@@ -153,7 +151,6 @@ public class VendeurDao {
         }
         return r;
     }
-
 
 
     public List<Vendeur> SelectVendeurs() {
@@ -170,7 +167,7 @@ public class VendeurDao {
                 String requete = "select * from user , vendeur " +
                         "where user.id = vendeur.id ";
 
-                System.out.println(requete+" ");
+                System.out.println(requete + " ");
                 ResultSet res = st.executeQuery(requete);
                 VendeurResultSet(list, res);
 
@@ -182,10 +179,6 @@ public class VendeurDao {
         }
         return list;
     }
-
-
-
-
 
 
     public Vendeur SelectVenArt(int id) {
@@ -201,9 +194,9 @@ public class VendeurDao {
                         "JOIN article a ON av.article_id = a.id " +
                         "JOIN user u ON v.id = u.id " +
 
-                        "WHERE a.id = '"+id+"'" ;
+                        "WHERE a.id = '" + id + "'";
 
-                System.out.println(requete+" ");
+                System.out.println(requete + " ");
                 ResultSet res = st.executeQuery(requete);
                 SingleVen(r, res);
 
@@ -233,10 +226,9 @@ public class VendeurDao {
             r.setNote(res.getInt("note"));
             r.setDescription(res.getString("description"));
 
-            System.out.println(res.getInt("id")+" "+res.getString("nom_boutique"));
+            System.out.println(res.getInt("id") + " " + res.getString("nom_boutique"));
         }
     }
-
 
 
     public void DeleteVen(Vendeur p) {
@@ -379,7 +371,7 @@ public class VendeurDao {
 */
 
 
-    public void Modifier(Vendeur p) {
+    public boolean Modifier(Vendeur p) {
 
         Connection con;
         if ((con = connecter()) != null) {
@@ -387,7 +379,7 @@ public class VendeurDao {
                 File file = p.getFile();
                 int status = 0;
 
-                if (file!=null) {
+                if (file != null) {
 
                     FileInputStream fin = new FileInputStream(file);
                     int len = (int) file.length();
@@ -419,12 +411,11 @@ public class VendeurDao {
                         if (st.executeUpdate() > 0) {
                             //recupérer le numéro sequentiel données par le SGBD
                             out.print("success vendeur");
+                            return true;
                         }
+                        else return false;
                     }
-                }
-
-                else
-                {
+                } else {
 
                     PreparedStatement st =
                             con.prepareStatement("UPDATE user SET username = ? , username_canonical = ?, password = ? ,  email = ?  , email_canonical = ? " +
@@ -452,19 +443,85 @@ public class VendeurDao {
 
                         if (st.executeUpdate() > 0) {
                             out.print("success vendeur 2");
+
+                            return true;
                         }
+                        else return false;
                     }
                 }
 
-                } catch (FileNotFoundException e) {
+            } catch (FileNotFoundException e) {
                 e.printStackTrace();
             } catch (SQLException e) {
                 e.printStackTrace();
             }
 
         }
+        return false;
     }
 
 
+    public void subscribe(int id) {
+        Connection con = connecter();
+        try {
+            String req = "INSERT INTO abonnements(acheteur_id, vendeur_id) VALUES (?,?)";
+            PreparedStatement ps = con.prepareStatement(req);
+            ps.setInt(1, statCuser.getId());
+            ps.setInt(2, id);
 
+            ps.executeUpdate();
+
+        } catch (SQLException ex) {
+            Logger.getLogger(ex.getMessage()).log(Level.SEVERE, null, ex);
+        }
+    }
+
+
+    public void unSubscribe(int id) {
+        Connection con = connecter();
+        try {
+            String req = "DELETE FROM abonnements WHERE acheteur_id = ? AND vendeur_id = ? ";
+            PreparedStatement ps = con.prepareStatement(req);
+            ps.setInt(1, statCuser.getId());
+            ps.setInt(2, id);
+
+            ps.executeUpdate();
+
+        } catch (SQLException ex) {
+            Logger.getLogger(ex.getMessage()).log(Level.SEVERE, null, ex);
+        }
+    }
+
+
+    public boolean isSubbed(int id)
+    {
+
+        Connection con = connecter();
+
+        String requete = "SELECT * FROM abonnements WHERE acheteur_id = ? AND vendeur_id = ?";
+        try
+
+        {
+            PreparedStatement ps = con.prepareStatement(requete);
+
+            ps.setInt(1, statCuser.getId());
+            ps.setInt(2, id);
+
+            ResultSet resultat = ps.executeQuery();
+            while (resultat.next()) {
+                return true;
+            }
+        } catch (
+                SQLException e)
+
+        {
+            e.printStackTrace();
+        }
+        return false;
+    }
 }
+
+
+
+
+

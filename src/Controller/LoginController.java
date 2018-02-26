@@ -65,10 +65,9 @@ public class LoginController implements Initializable {
         handleValidation();
         imgProgress.setVisible(false);
 
+        statCuser = new CurrentUser();
 
-        CommandeDao daoComm = new CommandeDao();
 
-        daoComm.vendeurCommandes(42);
     }
 
     @FXML
@@ -95,14 +94,14 @@ public class LoginController implements Initializable {
 
                 statCuser = users.get(i);
 
-                if (statCuser.getType().equals("acheteur")) {
+                if (statCuser.getType().equals("Acheteur")) {
                     statPanier = daoPan.findUserPanier(statCuser);
 
                     System.out.println(statPanier.getId() + "panier " + statPanier.getAcheteur().getId());
                     //        +" userrr "+ statPanier.getArticleList().get(0).getOrder_qte()+" qte " );
 
                 }
-                completeLogin(statCuser);
+                completeLogin();
             }
         }
     }
@@ -188,7 +187,7 @@ public class LoginController implements Initializable {
 
 
 
-    private void completeLogin(CurrentUser cuser) {
+    public void completeLogin() {
         btnLogin.getScene().getWindow().hide();
         try {
             imgProgress.setVisible(false);

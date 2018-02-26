@@ -34,6 +34,7 @@ import javafx.scene.paint.Color;
 import javafx.scene.paint.Paint;
 import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Text;
+import javafx.stage.Stage;
 import javafx.util.Duration;
 
 import java.io.ByteArrayInputStream;
@@ -42,6 +43,8 @@ import java.net.URL;
 import java.sql.Blob;
 import java.sql.SQLException;
 import java.util.ResourceBundle;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 import static Controller.LoginController.statCuser;
 import static Controller.LoginController.statPanier;
@@ -109,7 +112,7 @@ public class ProfileAchController implements Initializable {
         CurrentUser cuser = statCuser;
         System.out.println(cuser.getPhone()+" lala "+ cuser.getUsername());
 
-        Acheteur ach = dao.ChercherAcheteurId(cuser.getId());
+        Acheteur ach = dao.ChercherAcheteurId(statCuser.getId());
 
         lblName.setText(ach.getNom()+" "+ach.getPrenom());
         lblEmail.setText(ach.getEmail());
@@ -244,7 +247,34 @@ public class ProfileAchController implements Initializable {
 
 
     public void modifProfile(ActionEvent event) {
-        Scene scene = lblUsername.getParent().getScene();
+
+        try {
+            Stage dashboardStage = new Stage();
+            dashboardStage.setTitle("");
+
+            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("../modules/ProfileModules/ModifAcheteur.fxml"));
+
+            Parent root = fxmlLoader.load();
+            ModifAcheteur controller = fxmlLoader.getController();
+            controller.IntitData(statCuser.getId());
+
+            Scene scene = new Scene(root);
+            dashboardStage.setScene(scene);
+            dashboardStage.show();
+
+            FadeTransition ft = new FadeTransition(Duration.millis(1500));
+            ft.setNode(root);
+            ft.setFromValue(0.1);
+            ft.setToValue(1);
+            ft.setCycleCount(1);
+            ft.setAutoReverse(false);
+            ft.play();
+
+        } catch (IOException ex) {
+            Logger.getLogger(ProfileAchController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+       /* Scene scene = lblUsername.getParent().getScene();
         try {
             FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("../modules/ProfileModules/ModifAcheteur.fxml"));
 
@@ -268,7 +298,7 @@ public class ProfileAchController implements Initializable {
 
         } catch (IOException e) {
             e.printStackTrace();
-        }
+        }*/
     }
 
 

@@ -151,9 +151,10 @@ public class ModifArticle implements Initializable{
     @FXML
     public void deleteArticle()
     {
-
-        daoArt.DeleteArt(article);
-
+        if (daoArt.DeleteArt(article))
+        {
+            txtQte.getScene().getWindow().hide();
+        }
     }
 
     @FXML
@@ -169,13 +170,18 @@ public class ModifArticle implements Initializable{
         a.setNom(txtNom.getText());
         a.setDescription(txtDesc.getText());
         a.setPrix(Float.valueOf(txtPrix.getText()));
-        a.setOrder_qte(Integer.valueOf(txtQte.getText()));
+        a.setQuantity(Integer.valueOf(txtQte.getText()));
         a.setCategorie(comboCat.getValue());
         a.setImages(listImgAdd);
 
         System.out.println(listImgAdd.size()+" size added");
 
-        daoArt.ModifArticle(a);
+   //     daoArt.ModifArticle(a);
+
+        if (daoArt.ModifArticle(a))
+        {
+            txtQte.getScene().getWindow().hide();
+        }
     }
 
     @FXML

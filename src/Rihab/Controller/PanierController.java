@@ -1,5 +1,6 @@
 package Rihab.Controller;
 
+import Model.DAO.ArticlesDao;
 import Model.DAO.PanierDao;
 import Model.Entities.Article;
 import Model.Entities.Commande;
@@ -94,6 +95,8 @@ public class PanierController implements Initializable {
         Article item =listView.getSelectionModel().getSelectedItem();
         listView.getItems().remove(item);
 
+        new ArticlesDao().ModifArticleQteAdd(item);
+
         statPanier.getArticleList().remove(item);
 
         daoPan.DeleteArticle(item);
@@ -118,9 +121,14 @@ public class PanierController implements Initializable {
     @FXML
     void viderPanier(ActionEvent event) {
         listView.getItems().clear();
+
+        for (Article article : panier.getArticleList())
+        {
+            new ArticlesDao().ModifArticleQteAdd(article);
+        }
+
         panier.getArticleList().clear();
         statPanier.getArticleList().clear();
-
         daoPan.DeleteAllArticles(statPanier);
 
     }

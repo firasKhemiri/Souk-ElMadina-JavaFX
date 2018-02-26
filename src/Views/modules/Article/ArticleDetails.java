@@ -11,6 +11,9 @@ import Model.Entities.Vendeur;
 import Views.modules.Comments.CommentItem;
 import Views.modules.ItemController;
 import com.jfoenix.controls.JFXButton;
+import com.jfoenix.controls.JFXTextField;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
@@ -28,6 +31,7 @@ import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.RowConstraints;
 import javafx.scene.layout.VBox;
+import javafx.scene.paint.Color;
 import javafx.scene.text.Text;
 import org.controlsfx.control.Rating;
 
@@ -64,6 +68,8 @@ public class ArticleDetails implements Initializable{
     public Rating rating;
     public ImageView imgMe;
     public GridPane gridImages;
+    public Text txtStock;
+    public JFXTextField txtQte;
 
     Article carticle;
     private Panier panier = new Panier(statCuser, new Date(new java.util.Date().getTime()), new ArrayList<Article>());
@@ -74,36 +80,12 @@ public class ArticleDetails implements Initializable{
 
         carticle = new Article();
 
-    /*    gridComm.setVgap(54);
-
-        try {
-
-            int k = 1;
-            int j = 1;
-
-            for (int i=3; i<18; i++) {
-
-
-                FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("../Comments/CommentItem.fxml"));
-
-                Parent root = fxmlLoader.load();
-                Node node = (Node) root;
-
-
-
-
-                gridComm.add(node, j, i);
-
-            }
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-*/
-
     }
 
     public void setArticle(int id)
     {
+
+        txtQte.setText("1");
 
         ArticlesDao daoArt = new ArticlesDao();
         VendeurDao daoVen = new VendeurDao();
@@ -117,6 +99,14 @@ public class ArticleDetails implements Initializable{
         txtPrix.setText(String.valueOf(article.getPrix()+" DT"));
         txtNom.setText(article.getNom());
         txtDesc.setText(article.getDescription());
+
+        txtStock.setText("Il reste "+ article.getQuantity() +" elements en stock");
+
+        if (article.getQuantity()<1)
+        {
+            txtStock.setFill(Color.rgb(150,0,0,1));
+            btnPanier.setDisable(true);
+        }
 
 
         txtAdr.setText(vendeur.getAdresse());
@@ -232,6 +222,26 @@ public class ArticleDetails implements Initializable{
             });
         }
 
+
+        txtQte.textProperty().addListener(new ChangeListener<String>() {
+            @Override
+            public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue) {
+
+                if (!newValue.isEmpty()) {
+                    if (!newValue.matches("\\d*")) {
+                        txtQte.setText(newValue.replaceAll("[^\\d]", ""));
+
+                        int ord = Integer.valueOf(newValue);
+                        if (ord <= carticle.getQuantity() && ord != 0) {
+                            btnPanier.setDisable(false);
+                        } else
+                            btnPanier.setDisable(true);
+                    }
+                }
+            }
+        });
+
+
     }
 
 
@@ -289,11 +299,13 @@ public class ArticleDetails implements Initializable{
     @FXML
     void addToPanier(ActionEvent event) {
 
+        int ord = Integer.valueOf(txtQte.getText());
+
+        carticle.setOrder_qte(ord);
+
         panier.getArticleList().add(carticle);
 
         PanierDao daoPan = new PanierDao();
-
-        carticle.setOrder_qte(7);
 
         daoPan.addSingleArticleToPanier(statPanier,carticle);
 

@@ -35,7 +35,7 @@ public class UserDAO {
         return con;
     }
 
-    public void Ajouter(User p) {
+    public boolean Ajouter(User p) {
 
         Connection con = null;
         if ((con = connecter()) != null) {
@@ -96,28 +96,33 @@ public class UserDAO {
 
                     User cuser = new User();
 
-                    for (int i = 0; i < users.size(); i++) {
-                        System.out.println(users.get(i).getId() + " " + users.get(i).getUsername() + " ");
+                    for (User user : users) {
+                        System.out.println(user.getId() + " " + user.getUsername() + " ");
 
-                        cuser =  users.get(i);
+                        cuser = user;
 
+                        statCuser.setId(cuser.getId());
 
-                        statPanier = new Panier(cuser, new Date(new java.util.Date().getTime()), new ArrayList<Article>());
+                        statPanier = new Panier(cuser, new Date(new java.util.Date().getTime()), new ArrayList<>());
 
                         PanierDao daoPan = new PanierDao();
 
                         daoPan.add(statPanier);
 
 
-                        if (p.getType() == "Vendeur") {
+                        if (p.getType().equals("Vendeur")) {
                             try {
                                 PreparedStatement stv =
-                                        con.prepareStatement("INSERT INTO vendeur (id)  values (?)");
-                                stv.setInt(1, users.get(i).getId());
+                                        con.prepareStatement("INSERT INTO vendeur (id,nom_boutique,description)  values (?,?,?)");
+                                stv.setInt(1, statCuser.getId());
+                                stv.setString(2, statCuser.getNom_boutique());
+                                stv.setString(3, statCuser.getDescription());
 
                                 if (stv.executeUpdate() > 0) {
                                     out.print("success Vendeur");
-                                    cuser = users.get(i);
+                                    cuser = user;
+
+                                    return true;
 
                                 }
 
@@ -126,15 +131,17 @@ public class UserDAO {
                             }
 
 
-                        } else if (p.getType() == "Acheteur") {
+                        } else if (p.getType().equals("Acheteur")) {
                             try {
                                 PreparedStatement stv =
                                         con.prepareStatement("INSERT INTO acheteur ( id)  values (?)");
-                                stv.setInt(1, users.get(i).getId());
+                                stv.setInt(1, user.getId());
 
                                 if (stv.executeUpdate() > 0) {
                                     out.print("success acheteur");
-                                    cuser =  users.get(i);
+                                    cuser = user;
+
+                                    return true;
                                 }
 
                             } catch (Exception e) {
@@ -149,6 +156,7 @@ public class UserDAO {
             }
 
         }
+        return false;
 
     }
 
@@ -239,8 +247,8 @@ public class UserDAO {
             try {
                 Statement st = con.createStatement();
 
-                String requete = "select * from user , acheteur " +
-                        "where user.id = acheteur.id and user.id= '"+id+"'";
+                String requete = "select * from user  " +
+                        "where user.id= '"+id+"'";
 
                 //       System.out.println(requete+" ");
                 ResultSet res = st.executeQuery(requete);
@@ -461,7 +469,7 @@ public class UserDAO {
 
 
 
-    public void Modifier(User p) {
+    public Boolean Modifier(User p) {
 
         Connection con;
         if ((con = connecter()) != null) {
@@ -493,12 +501,47 @@ public class UserDAO {
                     if (st.executeUpdate() > 0) {
                         //recupérer le numéro sequentiel données par le SGBD
                         out.print("success user");
+                        return true;
                     }
+                    else {
+                        out.print("noooo success user");
+                        return false;
+                    }
+                }
+
+                else {
+
+                    PreparedStatement st =
+                            con.prepareStatement("UPDATE user SET username = ? , username_canonical = ?, password = ? ,  email = ?  , email_canonical = ? " +
+                                    ", nom = ? , prenom = ? , adresse = ? , phone = ? , gender = ? WHERE  (((id)='" + p.getId() + "'))");
+                    st.setString(1, p.getUsername());
+                    st.setString(2, p.getUsername());
+                    st.setString(3, p.getPassword());
+                    st.setString(4, p.getEmail());
+                    st.setString(5, p.getEmail());
+                    st.setString(6, p.getNom());
+                    st.setString(7, p.getPrenom());
+                    st.setString(8, p.getAdresse());
+                    st.setString(9, p.getPhone());
+                    st.setString(10, p.getGender());
+
+
+                    if (st.executeUpdate() > 0) {
+                        //recupérer le numéro sequentiel données par le SGBD
+                        out.print("success user");
+                        return true;
+                    }
+                    else {
+                        out.print("noooo success user");
+                        return false;
+                    }
+
                 }
             } catch (FileNotFoundException | SQLException e) {
                 e.printStackTrace();
             }
         }
+        return false;
     }
 
 

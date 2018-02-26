@@ -84,11 +84,12 @@ public class ArticlesDao {
 
                     }
 
-
-
+                    return true;
                 }
                 else {
-                    throw new SQLException("Ajout produit echoué.");
+                    return false;
+                    //throw new SQLException("Ajout produit echoué.");
+
                 }
             } catch (FileNotFoundException e) {
                 e.printStackTrace();
@@ -102,6 +103,43 @@ public class ArticlesDao {
     }
 
 
+
+    public boolean ModifArticleQte(Article t) {
+
+        try {
+            Connection con = connecter();
+            String req = "UPDATE article SET quantity = quantity - ?  WHERE id = ? ";
+            PreparedStatement ps = con.prepareStatement(req);
+            ps.setInt(1, t.getOrder_qte());
+            ps.setInt(2, t.getId());
+
+            ps.executeUpdate();
+
+            return true;
+        } catch (SQLException ex) {
+            Logger.getLogger(ex.getMessage()).log(Level.SEVERE, null, ex);
+        }
+        return false;
+    }
+
+
+    public boolean ModifArticleQteAdd(Article t) {
+
+        try {
+            Connection con = connecter();
+            String req = "UPDATE article SET quantity = quantity + ?  WHERE id = ? ";
+            PreparedStatement ps = con.prepareStatement(req);
+            ps.setInt(1, t.getOrder_qte());
+            ps.setInt(2, t.getId());
+
+            ps.executeUpdate();
+
+            return true;
+        } catch (SQLException ex) {
+            Logger.getLogger(ex.getMessage()).log(Level.SEVERE, null, ex);
+        }
+        return false;
+    }
 
 
 
@@ -162,7 +200,6 @@ public class ArticlesDao {
 
             }
 
-
             return true;
         } catch (SQLException ex) {
             Logger.getLogger(ex.getMessage()).log(Level.SEVERE, null, ex);
@@ -196,7 +233,7 @@ public class ArticlesDao {
 
 
 
-    public void DeleteArt(Article p) {
+    public Boolean DeleteArt(Article p) {
         try {
 
             if (p.getImages().size()>0)
@@ -255,12 +292,15 @@ public class ArticlesDao {
             if (st.executeUpdate(requete) > 0) {
                 //recupérer le numéro sequentiel données par le SGBD
                 out.print("success");
+
+                return true;
             }
 
 
         } catch (Exception e) {
             System.err.println("probleme avec la requete " + e.getMessage());
         }
+        return false;
 
     }
 
@@ -288,6 +328,51 @@ public class ArticlesDao {
 
         return articles;
     }
+
+
+    public List<Article> chercherCommandesArt(int id,int idComm) {
+        Connection con;
+        List<Article> articles = new ArrayList<>();
+        if ((con = connecter()) != null) {
+            try {
+                Statement st = con.createStatement();
+                String requete = "select * from commande c " +
+                        "JOIN commande_articles ca ON c.id = ca.commande_id " +
+                        "JOIN article a ON ca.article_id = a.id " +
+                        "JOIN articles_vendeurs av ON a.id = av.article_id " +
+                        "JOIN vendeur v ON av.vendeur_id = v.id " +
+                        "where v.id= '"+id+"' AND c.id = '"+idComm+"' AND c.etat = TRUE GROUP BY ca.article_id,ca.commande_id";
+
+                ResultSet res = st.executeQuery(requete);
+                Article r;
+                while (res.next()) {
+                    r = new Article();
+                    r.setId(res.getInt("a.id"));
+                    r.setNom(res.getString("a.nom"));
+                    r.setDescription(res.getString("a.description"));
+                    r.setCategorie(res.getString("a.categorie"));
+                    r.setPrix(res.getFloat("a.prix"));
+                    r.setQuantity(res.getInt("a.quantity"));
+
+                    r.setOrder_qte(res.getInt("ca.quantity"));
+
+                    r.setImages(SelectArticleImg(r.getId()));
+
+                    articles.add(r);
+
+                    System.out.println("success");
+                }
+
+
+            } catch (Exception e) {
+                System.err.println("probleme avec la requete " + e.getMessage());
+            }
+
+        }
+
+        return articles;
+    }
+
 
 
 

@@ -5,6 +5,8 @@
  */
 package Views.modules;
 
+import Controller.AccueilController;
+import Controller.LoginController;
 import Model.DAO.Upload;
 import Model.DAO.UserDAO;
 import Model.Entities.Acheteur;
@@ -32,7 +34,10 @@ import javafx.collections.ObservableList;
 import javafx.embed.swing.SwingFXUtils;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.geometry.Rectangle2D;
+import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.image.Image;
@@ -40,8 +45,12 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.FileChooser;
+import javafx.stage.Screen;
+import javafx.stage.Stage;
 
 import javax.imageio.ImageIO;
+
+import static Controller.LoginController.statCuser;
 
 /**
  * FXML Controller class
@@ -51,6 +60,8 @@ import javax.imageio.ImageIO;
 public class RegisterController implements Initializable {
 
 
+    public JFXTextField txtNomBout;
+    public JFXTextField txtDescBout;
     @FXML
     private JFXTextField txtUsername;
     @FXML
@@ -84,6 +95,7 @@ public class RegisterController implements Initializable {
     private static double progress8 = 0;
     private static double progress9 = 0;
     private static double progress10 = 0;
+    private static double progress11 = 0;
     @FXML
     private ProgressBar progressPersonal;
     @FXML
@@ -143,6 +155,8 @@ public class RegisterController implements Initializable {
         comboUserType.getSelectionModel().select("Select");
 
 
+        txtNomBout.setVisible(false);
+        txtDescBout.setVisible(false);
         //       handler = new DbHandler();
         updateProgress();
 //        setDepartmentsToCombo();
@@ -152,8 +166,8 @@ public class RegisterController implements Initializable {
         DecimalFormat decimalFormat = new DecimalFormat("###.#");
         decimalFormat.setRoundingMode(RoundingMode.HALF_UP);
 
-        //progressPersonal.setProgress(0.00);       
-        double sum_progress = progress10 + progress1 + progress2 + progress3 + progress4 + progress5 + progress6 + progress7 + progress8 + progress9;
+        //progressPersonal.setProgress(0.00);
+        double sum_progress = progress11 + progress10 + progress1 + progress2 + progress3 + progress4 + progress5 + progress6 + progress7 + progress8 + progress9;
 
         txtFname.textProperty().addListener(new ChangeListener<String>() {
             @Override
@@ -166,7 +180,7 @@ public class RegisterController implements Initializable {
 
                 }
 
-                double sum = (progress10 + progress1 + progress2 + progress3 + progress4 + progress5 + progress6 + progress7 + progress8 + progress9);
+                double sum = (progress11 + progress10 + progress1 + progress2 + progress3 + progress4 + progress5 + progress6 + progress7 + progress8 + progress9);
                 progressPersonal.setProgress(sum);
                 lblComplete.setText(decimalFormat.format(sum * 100) + "% complete");
             }
@@ -182,7 +196,7 @@ public class RegisterController implements Initializable {
                     progress2 = 0.0;
 
                 }
-                double sum = (progress10 + progress1 + progress2 + progress3 + progress4 + progress5 + progress6 + progress7 + progress8 + progress9);
+                double sum = (progress11 + progress10 + progress1 + progress2 + progress3 + progress4 + progress5 + progress6 + progress7 + progress8 + progress9);
                 progressPersonal.setProgress(sum);
                 lblComplete.setText(decimalFormat.format(sum * 100) + "% complete");
             }
@@ -198,7 +212,7 @@ public class RegisterController implements Initializable {
                     progress3 = 0.0;
 
                 }
-                double sum = (progress10 + progress1 + progress2 + progress3 + progress4 + progress5 + progress6 + progress7 + progress8 + progress9);
+                double sum = (progress11 + progress10 + progress1 + progress2 + progress3 + progress4 + progress5 + progress6 + progress7 + progress8 + progress9);
                 progressPersonal.setProgress(sum);
                 lblComplete.setText(decimalFormat.format(sum * 100) + "% complete");
             }
@@ -214,7 +228,7 @@ public class RegisterController implements Initializable {
                     progress4 = 0.0;
 
                 }
-                double sum = (progress10 + progress1 + progress2 + progress3 + progress4 + progress5 + progress6 + progress7 + progress8 + progress9);
+                double sum = (progress11 + progress10 + progress1 + progress2 + progress3 + progress4 + progress5 + progress6 + progress7 + progress8 + progress9);
                 progressPersonal.setProgress(sum);
                 lblComplete.setText(decimalFormat.format(sum * 100) + "% complete");
             }
@@ -230,7 +244,7 @@ public class RegisterController implements Initializable {
                     progress5 = 0.0;
 
                 }
-                double sum = (progress10 + progress1 + progress2 + progress3 + progress4 + progress5 + progress6 + progress7 + progress8 + progress9);
+                double sum = (progress11 + progress10 + progress1 + progress2 + progress3 + progress4 + progress5 + progress6 + progress7 + progress8 + progress9);
                 progressPersonal.setProgress(sum);
                 lblComplete.setText(decimalFormat.format(sum * 100) + "% complete");
             }
@@ -246,7 +260,7 @@ public class RegisterController implements Initializable {
                     progress6 = 0.0;
 
                 }
-                double sum = (progress10 + progress1 + progress2 + progress3 + progress4 + progress5 + progress6 + progress7 + progress8 + progress9);
+                double sum = (progress11 + progress10 + progress1 + progress2 + progress3 + progress4 + progress5 + progress6 + progress7 + progress8 + progress9);
                 progressPersonal.setProgress(sum);
                 lblComplete.setText(decimalFormat.format(sum * 100) + "% complete");
             }
@@ -262,7 +276,7 @@ public class RegisterController implements Initializable {
                     progress7 = 0.0;
 
                 }
-                double sum = (progress10 + progress1 + progress2 + progress3 + progress4 + progress5 + progress6 + progress7 + progress8 + progress9);
+                double sum = (progress11 + progress10 + progress1 + progress2 + progress3 + progress4 + progress5 + progress6 + progress7 + progress8 + progress9);
                 progressPersonal.setProgress(sum);
                 lblComplete.setText(decimalFormat.format(sum * 100) + "% complete");
             }
@@ -275,7 +289,7 @@ public class RegisterController implements Initializable {
                     progress8 = 0.1;
 
                 }
-                double sum = (progress10 + progress1 + progress2 + progress3 + progress4 + progress5 + progress6 + progress7 + progress8 + progress9);
+                double sum = (progress11 + progress10 + progress1 + progress2 + progress3 + progress4 + progress5 + progress6 + progress7 + progress8 + progress9);
                 progressPersonal.setProgress(sum);
                 lblComplete.setText(decimalFormat.format(sum * 100) + "% complete");
             }
@@ -288,20 +302,71 @@ public class RegisterController implements Initializable {
 
                 }
 
-                double sum = (progress10 + progress1 + progress2 + progress3 + progress4 + progress5 + progress6 + progress7 + progress8 + progress9);
+                double sum = (progress11 + progress10 + progress1 + progress2 + progress3 + progress4 + progress5 + progress6 + progress7 + progress8 + progress9);
                 progressPersonal.setProgress(sum);
                 lblComplete.setText(decimalFormat.format(sum * 100) + "% complete");
             }
         });
 
 
-    /*    comboUserType.getSelectionModel().selectedItemProperty().addListener(new ChangeListener<String>() {
+        comboUserType.getSelectionModel().selectedItemProperty().addListener(new ChangeListener<String>() {
             @Override
             public void changed(ObservableValue<? extends String> observable,
                     String oldValue,
                     String newValue) {
                 if (!newValue.isEmpty()) {
-                    progress10 = 0.1;
+
+                    if ((comboUserType.getValue()).equals("Vendeur"))
+                    {
+                        txtNomBout.setVisible(true);
+                        txtDescBout.setVisible(true);
+
+                        progress10 = 0.0;
+
+                        txtDescBout.textProperty().addListener(new ChangeListener<String>() {
+                            @Override
+                            public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue) {
+                                if (!newValue.isEmpty()) {
+                                    progress10 = 0.05;
+
+                                } else {
+                                    progress10 = 0.0;
+
+                                }
+                                double sum = (progress11 + progress10 + progress1 + progress2 + progress3 + progress4 + progress5 + progress6 + progress7 + progress8 + progress9);
+                                progressPersonal.setProgress(sum);
+                                lblComplete.setText(decimalFormat.format(sum * 100) + "% complete");
+                            }
+                        });
+
+
+                        txtNomBout.textProperty().addListener(new ChangeListener<String>() {
+                            @Override
+                            public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue) {
+                                if (!newValue.isEmpty()) {
+                                    progress11 = 0.05;
+
+                                } else {
+                                    progress11 = 0.0;
+
+                                }
+                                double sum = (progress11 + progress10 + progress1 + progress2 + progress3 + progress4 + progress5 + progress6 + progress7 + progress8 + progress9);
+                                progressPersonal.setProgress(sum);
+                                lblComplete.setText(decimalFormat.format(sum * 100) + "% complete");
+                            }
+                        });
+                    }
+                    else
+                    {
+                        txtNomBout.setVisible(false);
+                        txtNomBout.clear();
+                        txtDescBout.setVisible(false);
+                        txtDescBout.clear();
+
+                        progress10 = 0.1;
+
+                    }
+
                 } else {
                     progress10 = 0.0;
                 }
@@ -309,7 +374,7 @@ public class RegisterController implements Initializable {
                 progressPersonal.setProgress(sum);
                 lblComplete.setText(decimalFormat.format(sum * 100) + "% complete");
             }
-        });*/
+        });
 
     }
 
@@ -333,27 +398,29 @@ public class RegisterController implements Initializable {
 
         UserDAO userdao = new UserDAO();
 
-        User a = new User();
 
-        a.setUsername(txtUsername.getText());
-        a.setPrenom(txtFname.getText());
-        a.setNom(txtLname.getText());
-        a.setPassword(txtPassword.getText());
-        a.setEmail(txtEmail.getText());
-        a.setType(comboUserType.getValue());
-        a.setAdresse(txtLocation.getText());
+        statCuser.setUsername(txtUsername.getText());
+        statCuser.setPrenom(txtFname.getText());
+        statCuser.setNom(txtLname.getText());
+        statCuser.setPassword(txtPassword.getText());
+        statCuser.setEmail(txtEmail.getText());
+        statCuser.setType(comboUserType.getValue());
+        statCuser.setAdresse(txtLocation.getText());
 
-        a.setGender(getGender());
-        a.setPhone(txtMobile.getText());
+        statCuser.setGender(getGender());
+        statCuser.setPhone(txtMobile.getText());
 
-      //  a.setBirthday(dob.get);
+        statCuser.setNom_boutique(txtNomBout.getText());
+        statCuser.setDescription(txtDescBout.getText());
+
+        //  a.setBirthday(dob.get);
 
 
         if (file != null) {
 
             System.out.println(file+" FILE");
 
-            a.setFile(file);
+            statCuser.setFile(file);
             /*
             int status = userdao.uploadPic(file);
 
@@ -364,7 +431,40 @@ public class RegisterController implements Initializable {
             }*/
         }
 
-        userdao.Ajouter(a);
+        if(userdao.Ajouter(statCuser))
+        {
+
+            txtLocation.getScene().getWindow().hide();
+            try {
+
+                Stage dashboardStage = new Stage();
+                dashboardStage.setTitle("");
+                // Parent root = FXMLLoader.load(getClass().getResource("/Views/Accueil.fxml"));
+
+                FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/Views/Accueil.fxml"));
+
+                Parent root = null;
+                root = fxmlLoader.load();
+
+                AccueilController controller = fxmlLoader.getController();
+
+                Screen screen = Screen.getPrimary();
+                Rectangle2D bounds = screen.getVisualBounds();
+
+                dashboardStage.setX(bounds.getMinX());
+                dashboardStage.setY(bounds.getMinY());
+                dashboardStage.setWidth(bounds.getWidth());
+                dashboardStage.setHeight(bounds.getHeight());
+
+
+                Scene scene = new Scene(root);
+                dashboardStage.setScene(scene);
+                dashboardStage.show();
+            }
+            catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
 
 
     }
@@ -385,20 +485,20 @@ public class RegisterController implements Initializable {
     public void ChangeImg()
     {
         FileChooser fc = new FileChooser();
-            FileChooser.ExtensionFilter ext1 = new FileChooser.ExtensionFilter("JPG files(*.jpg)","*.JPG");
-            FileChooser.ExtensionFilter ext2 = new FileChooser.ExtensionFilter("PNG files(*.png)","*.PNG");
-            fc.getExtensionFilters().addAll(ext1,ext2);
-            file = fc.showOpenDialog(img.getScene().getWindow());
+        FileChooser.ExtensionFilter ext1 = new FileChooser.ExtensionFilter("JPG files(*.jpg)","*.JPG");
+        FileChooser.ExtensionFilter ext2 = new FileChooser.ExtensionFilter("PNG files(*.png)","*.PNG");
+        fc.getExtensionFilters().addAll(ext1,ext2);
+        file = fc.showOpenDialog(img.getScene().getWindow());
 
-            BufferedImage bf;
-            try {
-                bf = ImageIO.read(file);
-                Image image = SwingFXUtils.toFXImage(bf, null);
-                img.setImage(image);
+        BufferedImage bf;
+        try {
+            bf = ImageIO.read(file);
+            Image image = SwingFXUtils.toFXImage(bf, null);
+            img.setImage(image);
 
-            } catch (IOException ex) {
-                Logger.getLogger(Upload.class.getName()).log(Level.SEVERE, null, ex);
-            }
+        } catch (IOException ex) {
+            Logger.getLogger(Upload.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
 

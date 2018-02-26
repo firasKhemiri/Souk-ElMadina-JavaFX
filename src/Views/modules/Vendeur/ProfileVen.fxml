@@ -18,13 +18,14 @@
 <?import javafx.scene.shape.Circle?>
 <?import javafx.scene.text.Font?>
 
+<?import javafx.scene.layout.StackPane?>
 <AnchorPane id="AnchorPane" prefHeight="1080.0" prefWidth="1920.0" stylesheets="@../../custom.css" xmlns="http://javafx.com/javafx/8.0.121" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Views.modules.Vendeur.ProfileVen">
    <children>
-      <HBox fx:id="groupHolder" layoutX="300.0" layoutY="100.0" prefHeight="181.0" prefWidth="1100.0">
+      <HBox fx:id="groupHolder" layoutX="41.0" layoutY="96.0" prefHeight="181.0" prefWidth="1100.0">
          <children>
             <Group fx:id="groupRegistered">
                <children>
-                  <Pane layoutX="6.0" layoutY="39.0" prefHeight="135.0" prefWidth="263.0" style="-fx-background-color: white; -fx-background-radius: 4; -fx-effect: dropshadow(gaussian, rgb(0.0, 0.0, 0.0, 0.1), 6.0, 0.7, 0.0,1.5);">
+                  <Pane layoutX="-264.0" layoutY="39.0" prefHeight="135.0" prefWidth="263.0" style="-fx-background-color: white; -fx-background-radius: 4; -fx-effect: dropshadow(gaussian, rgb(0.0, 0.0, 0.0, 0.1), 6.0, 0.7, 0.0,1.5);">
                      <children>
                         <Pane layoutX="19.0" layoutY="-29.0" prefHeight="100.0" prefWidth="100.0" style="-fx-background-color: #1564C0; -fx-background-radius: 4; -fx-effect: dropshadow(gaussian, rgb(0.0, 0.0, 0.0, 0.1), 6.0, 0.7, 0.0,1.5);">
                            <children>
@@ -156,7 +157,7 @@
             </Group>
          </children>
       </HBox>
-      <AnchorPane layoutX="310.0" layoutY="296.0" prefHeight="440.0" prefWidth="263.0" style="-fx-background-color: white; -fx-background-radius: 3; -fx-border-radius: 3; -fx-effect: dropshadow(gaussian, rgb(0.0, 0.0, 0.0, 0.15), 6.0, 0.7, 0.0,1.5);">
+      <AnchorPane layoutX="41.0" layoutY="295.0" prefHeight="440.0" prefWidth="263.0" style="-fx-background-color: white; -fx-background-radius: 3; -fx-border-radius: 3; -fx-effect: dropshadow(gaussian, rgb(0.0, 0.0, 0.0, 0.15), 6.0, 0.7, 0.0,1.5);">
          <children>
             <Pane layoutY="-3.0" prefHeight="131.0" prefWidth="263.0" style="-fx-background-color: #00AACF; -fx-background-radius: 5 5 0 0;">
                <children>
@@ -226,7 +227,7 @@
                   </Label>
                </children>
             </VBox>
-            <Button id="modifVen" fx:id="modifVen" onAction="#modifVen" layoutX="191.0" layoutY="359.0" mnemonicParsing="false" style="-fx-background-color: #F87951;" styleClass="fab">
+            <Button id="modifVen" fx:id="modifVen" layoutX="191.0" layoutY="359.0" mnemonicParsing="false" onAction="#modifVen" style="-fx-background-color: #F87951;" styleClass="fab">
                <graphic>
                   <MaterialDesignIconView fill="WHITE" glyphName="BORDER_COLOR" size="24" wrappingWidth="22.000005185604095" />
                </graphic>
@@ -236,9 +237,9 @@
             </Button>
          </children>
       </AnchorPane>
-      <AnchorPane layoutX="850.0" layoutY="293.0" prefHeight="440.0" prefWidth="535.0" style="-fx-background-color: white; -fx-background-radius: 3; -fx-border-radius: 3; -fx-effect: dropshadow(gaussian, rgb(0.0, 0.0, 0.0, 0.15), 6.0, 0.7, 0.0,1.5);">
+      <AnchorPane layoutX="1141.0" layoutY="136.0" prefHeight="599.0" prefWidth="423.0" style="-fx-background-color: white; -fx-background-radius: 3; -fx-border-radius: 3; -fx-effect: dropshadow(gaussian, rgb(0.0, 0.0, 0.0, 0.15), 6.0, 0.7, 0.0,1.5);">
          <children>
-            <Pane layoutY="-1.0" prefHeight="60.0" prefWidth="535.0" style="-fx-background-color: #F87951; -fx-background-radius: 5 5 0 0;">
+            <Pane layoutY="-1.0" prefHeight="60.0" prefWidth="455.0" style="-fx-background-color: #F87951; -fx-background-radius: 5 5 0 0;">
                <children>
                   <Label layoutX="76.0" layoutY="15.0" prefHeight="30.0" prefWidth="207.0" text="Notifications récentes " textFill="#fffefe">
                      <font>
@@ -248,31 +249,31 @@
                   <FontAwesomeIconView fill="WHITE" glyphName="BELL" layoutX="14.0" layoutY="38.0" size="24.0" wrappingWidth="32.85714340209961" />
                </children>
             </Pane>
-            <Label layoutX="180.0" layoutY="203.0" prefHeight="30.0" prefWidth="175.0" text="No new notifications" textFill="#b2b1b1">
+            <Label layoutX="149.0" layoutY="206.0" prefHeight="30.0" prefWidth="175.0" text="No new notifications" textFill="#b2b1b1">
                <font>
                   <Font name="Roboto Medium" size="18.0" />
                </font>
             </Label>
          </children>
       </AnchorPane>
-      <AnchorPane layoutX="581.0" layoutY="295.0" prefHeight="440.0" prefWidth="263.0" style="-fx-background-color: white; -fx-background-radius: 3; -fx-border-radius: 3; -fx-effect: dropshadow(gaussian, rgb(0.0, 0.0, 0.0, 0.15), 6.0, 0.7, 0.0,1.5);">
+   <StackPane fx:id="artStackPane" layoutX="321.0" layoutY="295.0" >
+   <children>
+   <AnchorPane  prefHeight="440.0" prefWidth="263.0" style="-fx-background-color: white; -fx-background-radius: 3; -fx-border-radius: 3; -fx-effect: dropshadow(gaussian, rgb(0.0, 0.0, 0.0, 0.15), 6.0, 0.7, 0.0,1.5);">
          <children>
-            <Pane layoutY="-3.0" prefHeight="60.0" prefWidth="263.0" style="-fx-background-color: #00B3A0; -fx-background-radius: 5 5 0 0;">
+            <Pane id="stack" fx:id="stack" layoutY="-3.0" prefHeight="80.0" prefWidth="809.0" style="-fx-background-color: #00B3A0; -fx-background-radius: 5 5 0 0;">
                <children>
-                  <Label layoutX="16.0" layoutY="14.0" prefHeight="30.0" prefWidth="192.0" text="Commandes en attente " textFill="#fffefe">
+                  <Label layoutX="309.0" layoutY="25.0" prefHeight="30.0" prefWidth="192.0" text="Commandes en attente " textFill="#fffefe">
                      <font>
                         <Font name="Roboto Medium" size="18.0" />
                      </font>
                   </Label>
                </children>
             </Pane>
-            <JFXListView fx:id="departmentList" cellVerticalMargin="10.0" layoutX="8.0" layoutY="73.0" opacity="0.95" prefHeight="345.0" prefWidth="248.0" style="-fx-font-size: 14; -fx-font-family: 'Roboto Medium'; -fx-border-width: 0; -fx-border-color: null;" />
-            <Button fx:id="btnAddDepartment" layoutX="200.0" layoutY="372.0" mnemonicParsing="false" onAction="#addDepartment" style="-fx-background-color: #F87951;" styleClass="fab">
-               <graphic>
-                  <FontAwesomeIconView fill="WHITE" glyphName="PLUS" size="24.0" />
-               </graphic>
-            </Button>
+            <JFXListView fx:id="listCommandes" cellVerticalMargin="10.0" layoutX="10.0" layoutY="77.0" opacity="0.95" prefHeight="345.0" prefWidth="789.0" style="-fx-font-size: 14; -fx-font-family: 'Roboto Medium'; -fx-border-width: 0; -fx-border-color: null;" />
          </children>
       </AnchorPane>
+   </children>
+   </StackPane>
+
    </children>
 </AnchorPane>

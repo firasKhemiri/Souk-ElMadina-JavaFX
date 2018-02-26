@@ -17,7 +17,8 @@
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane id="AnchorPane" fx:id="parentPane" prefHeight="612.0" prefWidth="769.0" stylesheets="@../../custom.css" xmlns="http://javafx.com/javafx/8.0.121" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Views.modules.Article.AddArticle">
+<AnchorPane id="AnchorPane" fx:id="parentPane" prefHeight="612.0" prefWidth="769.0" stylesheets="@../../custom.css"
+            xmlns="http://javafx.com/javafx/8.0.121" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Views.modules.Article.AddArticle">
     <children>
         <AnchorPane layoutX="41.0" layoutY="44.0" prefHeight="529.0" prefWidth="332.0" styleClass="card-white">
             <children>

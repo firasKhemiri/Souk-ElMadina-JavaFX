@@ -18,14 +18,20 @@
 
             </ImageView>
 
-            <Text fx:id="txtName" layoutX="3.0" layoutY="183.0" strokeWidth="2.0" style="-fx-font-size:18" text="Note: " textAlignment="CENTER" wrappingWidth="184.20703125">
+            <Text fx:id="txtName" layoutX="3.0" layoutY="175.0" strokeWidth="2.0" style="-fx-font-size:18" text="Note: " textAlignment="CENTER" wrappingWidth="184.20703125">
                 <font>
                     <Font name="Roboto Black" size="15.0" />
                 </font>
             </Text>
 
-            <Text fx:id="txtPrix" layoutX="3.0" layoutY="213.0" strokeWidth="2.0" style="-fx-font-size:18 ; -fx-font-weight: bold" text="Prix: " textAlignment="CENTER"
-                  wrappingWidth="184.20703125">
+            <Text fx:id="txtPrix" layoutX="3.0" layoutY="202.0" strokeWidth="2.0" style="-fx-font-size:18 ; -fx-font-weight: bold" text="Prix: " textAlignment="CENTER" wrappingWidth="184.20703125">
+                <font>
+                    <Font name="Roboto Black" size="15.0" />
+                </font>
+            </Text>
+
+
+            <Text fx:id="txtStock" fill="#b50707" layoutX="3.0" layoutY="226.0" strokeWidth="2.0" style="-fx-font-size:14 ; -fx-font-weight: bold" text="Pas en stock" textAlignment="CENTER" wrappingWidth="184.20703125">
                 <font>
                     <Font name="Roboto Black" size="15.0" />
                 </font>

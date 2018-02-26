@@ -24,11 +24,12 @@ public class PanierDao {
 
     public void add(Panier t) {
         try {
-            String req = "INSERT INTO `panier`(`acheteur_id`, `date_modif`) VALUES (?,?)";
+            String req = "INSERT INTO panier (acheteur_id, date_modif) VALUES (?,?)";
             PreparedStatement ps = connection.prepareStatement(req);
             ps.setInt(1, t.getAcheteur().getId());
             ps.setDate(2, t.getDate_modif());
 
+            System.out.println(ps+" req");
             ps.executeUpdate();
 
         } catch (SQLException ex) {
@@ -118,7 +119,13 @@ public class PanierDao {
                 ps.setInt(2, article.getId());
                 ps.setInt(3, article.getOrder_qte());
 
-            ps.executeUpdate();
+            if (ps.executeUpdate() > 0) {
+                //recupérer le numéro sequentiel données par le SGBD
+                out.print("success panier");
+
+                new ArticlesDao().ModifArticleQte(article);
+
+            }
             } catch (SQLException ex) {
                 Logger.getLogger(ex.getMessage()).log(Level.SEVERE, null, ex);
         }
@@ -146,30 +153,6 @@ public class PanierDao {
             } catch (SQLException ex) {
                 Logger.getLogger(ex.getMessage()).log(Level.SEVERE, null, ex);
                 return null;
-            }
-        }
-
-    }
-
-    public int findTheId() {
-        {
-            int id = 0;
-
-            String requete = "SELECT `id` FROM `panier` WHERE `id` = (SELECT MAX(id) FROM `panier`)";
-            try {
-                Statement ps = connection.prepareStatement(requete);
-
-                ResultSet resultat = ps.executeQuery(requete);
-                while (resultat.next()) {
-                    id = resultat.getInt("id");
-
-                }
-
-                return id;
-
-            } catch (SQLException ex) {
-                Logger.getLogger(ex.getMessage()).log(Level.SEVERE, null, ex);
-                return 0;
             }
         }
 
