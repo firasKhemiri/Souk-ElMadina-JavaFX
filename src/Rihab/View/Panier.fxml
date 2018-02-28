@@ -1,47 +1,58 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import com.jfoenix.controls.JFXButton?>
-<?import com.jfoenix.controls.JFXListView?>
-<?import de.jensd.fx.glyphs.fontawesome.FontAwesomeIcon?>
 <?import javafx.scene.control.Label?>
-<?import javafx.scene.layout.AnchorPane?>
-<?import javafx.scene.text.Font?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
-<AnchorPane xmlns:fx="http://javafx.com/fxml/1" prefHeight="600.0" prefWidth="900.0" styleClass="anchor_pane"
-            stylesheets="@style.css" xmlns="http://javafx.com/javafx/9.0.1"
-            fx:controller="Rihab.Controller.PanierController">
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane prefHeight="600.0" prefWidth="1130.0" styleClass="anchor_pane" stylesheets="@/Views/custom.css" xmlns="http://javafx.com/javafx/8.0.121" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Rihab.Controller.PanierController">
     <children>
-        <TableView fx:id="listView" layoutX="87.0" layoutY="108.0" prefHeight="339.0" prefWidth="814.0">
+        <TableView fx:id="listView" layoutX="167.0" layoutY="108.0" prefHeight="339.0" prefWidth="830.0">
 
             <columns>
 
                 <TableColumn fx:id="colNom" prefWidth="150" text="Nom">
                 </TableColumn>
 
-                <TableColumn fx:id="colDesc" prefWidth="200" text="Description">
+                <TableColumn fx:id="colDesc" prefWidth="300" text="Description">
                 </TableColumn>
                 <TableColumn fx:id="colCat" prefWidth="150" text="Categorie">
                 </TableColumn>
                 <TableColumn fx:id="colPrix" prefWidth="100" text="Prix">
                 </TableColumn>
-                <TableColumn fx:id="colQte" prefWidth="100" text="Quantité">
+                <TableColumn fx:id="colQte" prefWidth="120" text="Quantité">
                 </TableColumn>
             </columns>
 
         </TableView>
 
 
-        <JFXButton fx:id="enleverBtn" layoutX="87.0" layoutY="458.0" onAction="#enleverArticle" prefHeight="60.0"
-                   prefWidth="246.0" text="Enlever du panier"/>
-        <JFXButton fx:id="viderPanierBtn" layoutX="87.0" layoutY="526.0" onAction="#viderPanier" prefHeight="60.0"
-                   prefWidth="246.0" text="vider la panier"/>
-        <JFXButton fx:id="payementBtn" layoutX="434.0" layoutY="526.0" onAction="#payementAction" prefHeight="60.0"
-                   prefWidth="266.0" text="Aller au payement"/>
-        <Label alignment="TOP_LEFT" contentDisplay="TEXT_ONLY" layoutX="87.0" layoutY="10.0" prefHeight="94.0"
-               prefWidth="187.0" styleClass="titre" text="Panier" textAlignment="CENTER">
+        <JFXButton fx:id="enleverBtn" layoutX="97.0" layoutY="496.0" onAction="#enleverArticle" prefHeight="60.0" prefWidth="246.0" ripplerFill="#f52020" style="-fx-background-color: #f39c12 ; " text="Enlever du panier" textFill="WHITE">
             <font>
-                <Font size="64.0"/>
+                <Font size="20" />
+            </font>
+        </JFXButton>
+
+        <JFXButton fx:id="viderPanierBtn" layoutX="440.0" layoutY="496.0" onAction="#viderPanier" prefHeight="60.0" prefWidth="246.0" ripplerFill="#f52020" style="-fx-background-color: #f39c12 ; " text="Vider la panier" textFill="WHITE">
+            <font>
+                <Font size="20" />
+            </font>
+        </JFXButton>
+
+        <JFXButton fx:id="payementBtn" layoutX="784.0" layoutY="496.0" onAction="#payementAction" prefHeight="60.0" prefWidth="266.0" ripplerFill="#f52020" style="-fx-background-color: #f39c12 ; " text="Aller au payement" textFill="WHITE">
+            <font>
+                <Font size="20" />
+            </font>
+        </JFXButton>
+
+
+
+
+        <Label alignment="TOP_LEFT" contentDisplay="TEXT_ONLY" layoutX="47.0" layoutY="10.0" prefHeight="94.0" prefWidth="187.0" styleClass="titre" text="Panier" textAlignment="CENTER">
+            <font>
+                <Font size="64.0" />
             </font>
         </Label>
 

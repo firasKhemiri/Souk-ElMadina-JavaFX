@@ -51,6 +51,13 @@
     -fx-text-fill: #E1E8ED;
 }
 
+
+.combo-boxx {
+    -fx-font-size: 12pt;
+    -fx-font-family: "Segoe UI Semibold";
+    -fx-text-fill: rgba(49, 49, 49, 0.87);
+}
+
 .combo-box .list-view .list-cell:filled:selected {
     -fx-font-size: 12pt;
     -fx-font-family: "Segoe UI Semibold";

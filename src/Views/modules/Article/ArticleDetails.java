@@ -1,5 +1,7 @@
 package Views.modules.Article;
 
+import Controller.AccueilController;
+import Controller.LoginController;
 import Model.DAO.ArticlesDao;
 import Model.DAO.CommentsDao;
 import Model.DAO.PanierDao;
@@ -12,6 +14,8 @@ import Views.modules.Comments.CommentItem;
 import Views.modules.ItemController;
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXTextField;
+import javafx.animation.FadeTransition;
+import javafx.application.Platform;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.event.ActionEvent;
@@ -20,8 +24,10 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.geometry.Insets;
+import javafx.geometry.Rectangle2D;
 import javafx.scene.Node;
 import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextArea;
 import javafx.scene.image.Image;
@@ -33,6 +39,9 @@ import javafx.scene.layout.RowConstraints;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Text;
+import javafx.stage.Screen;
+import javafx.stage.Stage;
+import javafx.util.Duration;
 import org.controlsfx.control.Rating;
 
 import java.io.ByteArrayInputStream;
@@ -41,9 +50,13 @@ import java.net.URL;
 import java.sql.Blob;
 import java.sql.Date;
 import java.sql.SQLException;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 import static Controller.LoginController.statCuser;
 import static Controller.LoginController.statPanier;
@@ -70,6 +83,7 @@ public class ArticleDetails implements Initializable{
     public GridPane gridImages;
     public Text txtStock;
     public JFXTextField txtQte;
+    public Text txtDatePub;
 
     Article carticle;
     private Panier panier = new Panier(statCuser, new Date(new java.util.Date().getTime()), new ArrayList<Article>());
@@ -79,6 +93,8 @@ public class ArticleDetails implements Initializable{
     public void initialize(URL location, ResourceBundle resources) {
 
         carticle = new Article();
+
+        panier.setArticleList(statPanier.getArticleList());
 
     }
 
@@ -110,6 +126,15 @@ public class ArticleDetails implements Initializable{
 
 
         txtAdr.setText(vendeur.getAdresse());
+
+        txtCat.setText(article.getCategorie());
+
+        DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd HH : mm");
+        java.util.Date date = article.getDate_pub();
+        txtDatePub.setText(dateFormat.format(date)); //2016/11/16 12:08:43
+
+
+
         nomVen.setText(vendeur.getNom_boutique());
 
         Blob blob = article.getImages().get(0).getImage();
@@ -230,20 +255,25 @@ public class ArticleDetails implements Initializable{
                 if (!newValue.isEmpty()) {
                     if (!newValue.matches("\\d*")) {
                         txtQte.setText(newValue.replaceAll("[^\\d]", ""));
-
-                        int ord = Integer.valueOf(newValue);
-                        if (ord <= carticle.getQuantity() && ord != 0) {
-                            btnPanier.setDisable(false);
-                        } else
-                            btnPanier.setDisable(true);
-                    }
                 }
+                    int ord = Integer.valueOf(txtQte.getText());
+                    if (ord <= carticle.getQuantity() && ord != 0) {
+                        btnPanier.setDisable(false);
+                    } else
+                        btnPanier.setDisable(true);
+                }
+
             }
         });
 
+        if (statCuser.getType().equals("Vendeur"))
+        {
+            btnPanier.setDisable(true);
+        }
 
     }
 
+   // pic.setfill(new image pattern(new image))
 
 
     public void setComments(int id)
@@ -305,6 +335,11 @@ public class ArticleDetails implements Initializable{
 
         panier.getArticleList().add(carticle);
 
+        statPanier.setArticleList(panier.getArticleList());
+
+        txtStock.setText("Il reste "+ (carticle.getQuantity() - ord) +" elements en stock");
+
+
         PanierDao daoPan = new PanierDao();
 
         daoPan.addSingleArticleToPanier(statPanier,carticle);
@@ -342,4 +377,73 @@ public class ArticleDetails implements Initializable{
         }*/
 
     }
+
+    public void openHome(ActionEvent event) {
+
+        try {
+            Scene scene = btnPanier.getParent().getScene();
+
+            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/Views/Accueil.fxml"));
+
+            Parent root = fxmlLoader.load();
+
+            scene.setRoot(root);
+
+            AccueilController controller = fxmlLoader.getController();
+
+            //    controller.(vendeur.getId());
+
+
+            FadeTransition ft = new FadeTransition(Duration.millis(1500));
+            ft.setNode(root);
+            ft.setFromValue(0.1);
+            ft.setToValue(1);
+            ft.setCycleCount(1);
+            ft.setAutoReverse(false);
+            ft.play();
+
+
+        } catch (IOException e) {
+        e.printStackTrace();
+    }
+
+
+    }
+
+    public void Profile(ActionEvent event) {
+    }
+
+    public void Vendeur(ActionEvent event) {
+    }
+
+    @FXML
+    private void logOff(ActionEvent event) {
+
+        btnPanier.getScene().getWindow().hide();
+        Stage dashboardStage = new Stage();
+        dashboardStage.setTitle("");
+        // Parent root = FXMLLoader.load(getClass().getResource("/Views/Accueil.fxml"));
+
+        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/Views/Login.fxml"));
+
+        Parent root = null;
+        try {
+            root = fxmlLoader.load();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        Scene scene = new Scene(root);
+        dashboardStage.setScene(scene);
+        dashboardStage.show();
+
+
+
+    }
+
+    @FXML
+    private void exit(ActionEvent event) {
+        Platform.exit();
+    }
+
 }

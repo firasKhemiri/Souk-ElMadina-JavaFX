@@ -6,6 +6,7 @@
 package Model.Entities;
 
 import java.sql.Date;
+import java.sql.Timestamp;
 
 /**
  *
@@ -15,7 +16,7 @@ public class Avis {
     
     private int id;
     
-    private Date date_pub;
+    private Timestamp date_pub;
     
     private String avis;
     
@@ -52,11 +53,11 @@ public class Avis {
         this.mine = mine;
     }
 
-    public Date getDate_pub() {
+    public Timestamp getDate_pub() {
         return date_pub;
     }
 
-    public void setDate_pub(Date date_pub) {
+    public void setDate_pub(Timestamp date_pub) {
         this.date_pub = date_pub;
     }
 

@@ -25,7 +25,7 @@ public class CommentsDao {
         if ((con = connecter()) != null) {
             try {
                 String requete = "SELECT *"
-                        + "         FROM avis WHERE article_id = '"+id+"'";
+                        + "         FROM avis WHERE article_id = '"+id+"' ORDER BY date_pub DESC ";
 
                 PreparedStatement ps = con.prepareStatement(requete);
 
@@ -37,7 +37,7 @@ public class CommentsDao {
                     avis.setId(res.getInt("id"));
                     avis.setAcheteur(new UserDAO().ChercherAcheteurId(res.getInt("acheteur_id")));
                     avis.setAvis(res.getString("avis"));
-                    avis.setDate_pub(res.getDate("date_pub"));
+                    avis.setDate_pub(res.getTimestamp("date_pub"));
                     avis.setNote(res.getDouble("note"));
 
                     System.out.println("avis "+ avis.getAvis());
@@ -71,7 +71,8 @@ public class CommentsDao {
             ps.setInt(2, idArt);
             ps.setString(3,avis);
             ps.setDouble(4,note);
-            ps.setDate(5, new Date(new java.util.Date().getTime()));
+
+            ps.setTimestamp(5, new Timestamp(new java.util.Date().getTime()));
 
             ps.executeUpdate();
 

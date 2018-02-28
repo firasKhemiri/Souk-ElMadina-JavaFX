@@ -167,6 +167,13 @@
     -fx-border-color: -swatch-500;
 }
 
+.combo-box .list-cell {-fx-text-fill: "#000"; }
+
+
+.cm .combo-box .list-cell {-fx-text-fill: "#fff"; }
+#comboTriType .combo-box .list-cell {-fx-text-fill: "#fff"; }
+
+
 .combo-box-base>.label, .choice-box>.label {
     -fx-padding: 0.7em 0.7em 0.7em 0em;
 }

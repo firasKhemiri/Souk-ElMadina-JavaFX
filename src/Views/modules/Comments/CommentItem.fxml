@@ -19,11 +19,11 @@
         </image>
     </ImageView>
 
-    <Rating fx:id="rating" layoutX="649.0" layoutY="8.0" scaleX="0.7" scaleY="0.7" disable="true">
+    <Rating fx:id="rating" disable="true" layoutX="639.0" layoutY="8.0" scaleX="0.7" scaleY="0.7">
         
     </Rating>
 
-    <TextFlow layoutX="818.0" layoutY="13.0" maxWidth="500" prefHeight="22.0" prefWidth="148.0" textAlignment="RIGHT">
+    <TextFlow layoutX="798.0" layoutY="13.0" maxWidth="500" prefHeight="22.0" prefWidth="148.0" textAlignment="RIGHT">
       <children>
            <Text fx:id="txtDate" style=" -fx-font-size: 16; -fx-stroke: rgba(0,0,0,0.39)" text="Date commentaire " wrappingWidth="159.5" />
       </children>

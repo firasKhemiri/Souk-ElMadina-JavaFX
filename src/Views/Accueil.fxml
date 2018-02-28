@@ -65,7 +65,7 @@
                   </Text>
                </center>
             </JFXToolbar>
-            <HBox fx:id="acbox" prefHeight="854.0" prefWidth="1589.0">
+            <HBox id="menuP" fx:id="acbox" prefHeight="854.0" prefWidth="1589.0">
                <children>
                   <AnchorPane id="menuu" fx:id="sideAnchor" minWidth="250" prefHeight="844.0" prefWidth="288.0" styleClass="side-bar">
                      <children>
@@ -81,7 +81,7 @@
                               <RowConstraints maxHeight="144.0" minHeight="20.0" prefHeight="97.0" vgrow="SOMETIMES" />
                            </rowConstraints>
                            <children>
-                              <JFXButton fx:id="btnHome" onAction="#openHome" prefHeight="87.0" prefWidth="189.0" styleClass="side-buttons" text="Home" textFill="#757575">
+                              <JFXButton fx:id="btnHome" onAction="#openHome" prefHeight="87.0" prefWidth="189.0" styleClass="side-buttons" text="Accueil" textFill="#757575">
                                  <font>
                                     <Font name="Roboto Medium" size="20.0" />
                                  </font>
@@ -113,7 +113,7 @@
                                     <FontAwesomeIconView fill="#757575" glyphName="SIGN_OUT" size="28.0" wrappingWidth="40.0" />
                                  </graphic>
                               </JFXButton>
-                              <JFXButton fx:id="btnClose" onAction="#exit" prefHeight="81.0" prefWidth="216.0" styleClass="side-buttons" text="Exit" textFill="#757575" GridPane.rowIndex="4">
+                              <JFXButton fx:id="btnClose" onAction="#exit" prefHeight="81.0" prefWidth="216.0" styleClass="side-buttons" text="Quitter" textFill="#757575" GridPane.rowIndex="4">
                                  <font>
                                     <Font name="Roboto Medium" size="20.0" />
                                  </font>

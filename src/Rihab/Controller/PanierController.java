@@ -73,7 +73,17 @@ public class PanierController implements Initializable {
 
         daoPan = new PanierDao();
 
+        if (panier.getArticleList().size()==0)
+        {
+            enleverBtn.setDisable(true);
+            payementBtn.setDisable(true);
+            viderPanierBtn.setDisable(true);
+        }
+
+
         ObservableList<Article> list = FXCollections.observableArrayList(panier.getArticleList());
+
+
 
 
         colNom.setCellValueFactory(new PropertyValueFactory<>("nom"));
@@ -104,13 +114,17 @@ public class PanierController implements Initializable {
 
     @FXML
     void payementAction(ActionEvent event) throws IOException {
-        Commande commande = new Commande(panier.getAcheteur(), "", "", "", panier, new Date(new java.util.Date().getTime()), 0);
+
+        Commande commande = new Commande(panier.getAcheteur(), "", "", "", statPanier, new Date(new java.util.Date().getTime()), 0);
+
         FXMLLoader loader = new FXMLLoader();
         loader.setLocation(getClass().getResource("/Rihab/View/CommandePaiement.fxml"));
         Parent parent = loader.load();
         Scene scene = new Scene(parent);
+
         CommandePaiement cmdPai = loader.getController();
         cmdPai.initData(commande);
+
         Stage window = (Stage) ((Node) event.getSource()).getScene().getWindow();
         window.setScene(scene);
         window.show();

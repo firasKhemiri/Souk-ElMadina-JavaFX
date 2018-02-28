@@ -6,6 +6,7 @@
 package Model.Entities;
 
 import java.sql.Date;
+import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -33,7 +34,7 @@ public class Article {
 
     private int order_qte;
 
-    private Date date_pub;
+    private Timestamp date_pub;
 
 
 
@@ -48,11 +49,11 @@ public class Article {
         return quantity;
     }
 
-    public Date getDate_pub() {
+    public Timestamp getDate_pub() {
         return date_pub;
     }
 
-    public void setDate_pub(Date date_pub) {
+    public void setDate_pub(Timestamp date_pub) {
         this.date_pub = date_pub;
     }
 

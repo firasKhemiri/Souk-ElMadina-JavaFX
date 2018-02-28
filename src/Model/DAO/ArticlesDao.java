@@ -13,6 +13,7 @@ import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
+import static Controller.LoginController.statCuser;
 import static Controller.LoginController.statPanier;
 import static java.lang.System.in;
 import static java.lang.System.out;
@@ -38,7 +39,8 @@ public class ArticlesDao {
             ps.setFloat(3, t.getPrix());
             ps.setString(4, t.getCategorie());
             ps.setInt(5, t.getQuantity());
-            ps.setDate(6, new Date(new java.util.Date().getTime()));
+          //  ps.setDate(6, new Date(new java.util.Date().getTime()));
+            ps.setTimestamp(6, new Timestamp(new java.util.Date().getTime()));
 
             int affectedRows = ps.executeUpdate();
 
@@ -355,6 +357,8 @@ public class ArticlesDao {
                     r.setQuantity(res.getInt("a.quantity"));
 
                     r.setOrder_qte(res.getInt("ca.quantity"));
+                    r.setDate_pub(res.getTimestamp("date_pub"));
+
 
                     r.setImages(SelectArticleImg(r.getId()));
 
@@ -441,10 +445,12 @@ public class ArticlesDao {
             r.setQuantity(res.getInt("quantity"));
 
             r.setImages(SelectArticleImg(r.getId()));
+            r.setDate_pub(res.getTimestamp("date_pub"));
 
             articles.add(r);
 
             System.out.println("success");
+
         }
     }
 
@@ -613,6 +619,46 @@ public class ArticlesDao {
     }
 
 
+
+    public void ajoutWatch(int idUser, int idArt)
+    {
+        Connection con = connecter();
+        try {
+            String req = "INSERT INTO acheteurs_watchlists(acheteur_id, article_id) VALUES (?,?)";
+            PreparedStatement ps = con.prepareStatement(req);
+            ps.setInt(1, idUser);
+            ps.setInt(2, idArt);
+
+            ps.executeUpdate();
+
+        } catch (SQLException ex) {
+            Logger.getLogger(ex.getMessage()).log(Level.SEVERE, null, ex);
+        }
+
+    }
+
+
+
+    public Article SelectWatchedArticle(int id) {
+        Connection con;
+        List<Article> articles = new ArrayList<>();
+        if ((con = connecter()) != null) {
+            try {
+                Statement st = con.createStatement();
+                String requete = "SELECT * "+
+                        "FROM article JOIN acheteurs_watchlists aw ON article.id = aw.article_id " +
+                        "JOIN acheteur ach ON aw.acheteur_id = ach.id " +
+                        "WHERE ach.id = '"+id+"'" ;
+
+                ResultSet res = st.executeQuery(requete);
+                ArticlesResultSet(articles, res);
+
+            } catch (Exception e) {
+                System.err.println("probleme avec la requete " + e.getMessage());
+            }
+        }
+        return articles.get(0);
+    }
 
 
 

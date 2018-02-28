@@ -16,28 +16,34 @@ import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
+import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
 
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
+import static Controller.LoginController.statPanier;
+
 public class Facture implements Initializable {
     @FXML
     private JFXButton allArticlesBtn;
-    @FXML
-    private TableView<ArticleTableView> tableView;
-    @FXML
-    private TableColumn<ArticleTableView, String> nomTable;
+
 
     @FXML
-    private TableColumn<ArticleTableView, String> categorieTable;
+    private TableColumn<Article, String> colNom;
+    @FXML
+    private TableColumn<Article, String> colDesc;
+    @FXML
+    private TableColumn<Article, String> colCat;
+    @FXML
+    private TableColumn<Article, Integer> colPrix;
+    @FXML
+    private TableColumn<Article, Integer> colQte;
 
     @FXML
-    private TableColumn<ArticleTableView, String> DescriptionTable;
+    private TableView<Article> listView;
 
-    @FXML
-    private TableColumn<ArticleTableView, Number> prixTable;
 
     @FXML
     private Label nomLbl;
@@ -79,16 +85,26 @@ public class Facture implements Initializable {
         emailLbl.setText(commande.getAcheteur().getEmail());
         prenomLbl.setText(commande.getAcheteur().getPrenom());
         nomLbl.setText(commande.getAcheteur().getNom());
-        tableView.setItems(fillTable());
+
+
+        ObservableList<Article> list = FXCollections.observableArrayList(commande.getPanier().getArticleList());
+
+
+        colNom.setCellValueFactory(new PropertyValueFactory<>("nom"));
+        colDesc.setCellValueFactory(new PropertyValueFactory<>("description"));
+        colCat.setCellValueFactory(new PropertyValueFactory<>("categorie"));
+        colPrix.setCellValueFactory(new PropertyValueFactory<>("prix"));
+        colQte.setCellValueFactory(new PropertyValueFactory<>("order_qte"));
+
+        listView.setItems(list);
+
     }
 
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        nomTable.setCellValueFactory(cellData -> cellData.getValue().nomProperty());
-        categorieTable.setCellValueFactory(cellData -> cellData.getValue().categorieProperty());
-        DescriptionTable.setCellValueFactory(cellData -> cellData.getValue().descriptionProperty());
-        prixTable.setCellValueFactory(cellData -> cellData.getValue().prixProperty());
+
+
     }
 
     private ObservableList<ArticleTableView> fillTable() {
@@ -103,13 +119,8 @@ public class Facture implements Initializable {
     }
 
     @FXML
-    void goToAllArticles(ActionEvent event) throws IOException {
-        FXMLLoader loader = new FXMLLoader();
-        loader.setLocation(getClass().getResource("/Views/Accueil.fxml"));
-        Parent parent = loader.load();
-        Scene scene = new Scene(parent);
-        Stage window = (Stage) ((Node) event.getSource()).getScene().getWindow();
-        window.setScene(scene);
-        window.show();
+    void exit(ActionEvent event) {
+
+        prenomLbl.getScene().getWindow().hide();
     }
 }

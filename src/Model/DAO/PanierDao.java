@@ -119,6 +119,7 @@ public class PanierDao {
                 ps.setInt(2, article.getId());
                 ps.setInt(3, article.getOrder_qte());
 
+                System.out.println(t.getId()+" art"+article.getId()+" qte " +article.getOrder_qte());
             if (ps.executeUpdate() > 0) {
                 //recupérer le numéro sequentiel données par le SGBD
                 out.print("success panier");

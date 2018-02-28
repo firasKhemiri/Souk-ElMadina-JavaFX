@@ -19,6 +19,9 @@ import java.io.IOException;
 import java.net.URL;
 import java.sql.Blob;
 import java.sql.SQLException;
+import java.time.LocalDate;
+import java.time.ZoneId;
+import java.util.Date;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -106,6 +109,9 @@ public class ModifAcheteur implements Initializable {
         txtLocation.setText(user.getAdresse());
         txtMobile.setText(user.getPhone());
 
+        dob.setValue(user.getBirthday().toLocalDate());
+
+
         if (user.getGender().equals("Male"))
         {
             rdMale.setSelected(true);
@@ -162,6 +168,13 @@ public class ModifAcheteur implements Initializable {
 
         user.setGender(getGender());
         user.setPhone(txtMobile.getText());
+
+
+        LocalDate localDate = dob.getValue();
+        Date dateFromPicker = Date.from(localDate.atStartOfDay(ZoneId.systemDefault()).toInstant());
+
+        user.setBirthday(new java.sql.Date( dateFromPicker.getTime()));
+
 
 
         System.out.println(user.getPhone()+"ph  FILE");

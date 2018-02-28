@@ -2,9 +2,11 @@ package Views.modules.Vendeur;
 
 import Controller.ArticlesController;
 import Model.DAO.CommandeDao;
+import Model.DAO.VendeurDao;
 import Model.Entities.Article;
 import Model.Entities.Commande;
 import Model.Entities.CurrentUser;
+import Model.Entities.Vendeur;
 import Rihab.Controller.PanierController;
 import Views.modules.Article.AddArticle;
 import com.jfoenix.controls.*;
@@ -20,17 +22,28 @@ import javafx.geometry.Rectangle2D;
 import javafx.scene.Group;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.SnapshotParameters;
+import javafx.scene.control.Label;
+import javafx.scene.effect.DropShadow;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.StackPane;
+import javafx.scene.paint.Color;
+import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Text;
 import javafx.stage.Screen;
 import javafx.stage.Stage;
 import javafx.util.Duration;
+import org.controlsfx.control.Rating;
 
+import java.io.ByteArrayInputStream;
 import java.io.IOException;
 import java.net.URL;
+import java.sql.Blob;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
@@ -47,9 +60,22 @@ public class ProfileVen implements Initializable {
     public JFXListView listCommandes;
     public Pane stack;
     public StackPane artStackPane;
+    public ImageView imageVen;
+    public Label lblUsername;
+    public Label lblType;
+    public Label lblAdresse;
+    public Label lblName;
+    public Label lblEmail;
+    public Label lblPhone;
+    public Label lblCreated;
+    public Label lblSubs;
+    public Rating rating;
+    public Label lblNomBout;
 
 
     private List<Commande> commandes = new ArrayList<>();
+
+    private VendeurDao daoVen ;
 
     private boolean res = false ;
 
@@ -63,6 +89,10 @@ public class ProfileVen implements Initializable {
         String articlesNames = " ";
 
         CommandeDao daoComm = new CommandeDao();
+
+        daoVen = new VendeurDao();
+
+        Vendeur vendeur = daoVen.ChercherVen(statCuser.getId());
 
         commandes = daoComm.vendeurCommandes(statCuser.getId());
 
@@ -95,6 +125,39 @@ public class ProfileVen implements Initializable {
                 }
             }
         });
+
+
+        lblName.setText(vendeur.getNom()+" "+vendeur.getPrenom());
+        lblEmail.setText(vendeur.getEmail());
+        // lblType.setText(vendeur.getType());
+        lblPhone.setText(vendeur.getPhone());
+
+        lblAdresse.setText(vendeur.getAdresse());
+        lblUsername.setText(vendeur.getUsername());
+
+        rating.setRating(vendeur.getNote());
+        rating.setDisable(true);
+
+        lblSubs.setText(String.valueOf(daoVen.selectSubs(vendeur.getId()).size()) + " sont abonnés a ce vendeur");
+
+        lblNomBout.setText(vendeur.getNom_boutique());
+
+        if (vendeur.getPhotoprof() != null)
+            try {
+                Blob blob = vendeur.getPhotoprof();
+                byte byteImage[];
+                byteImage = blob.getBytes(1,(int)blob.length());
+                Image img = new Image(new ByteArrayInputStream(byteImage));
+               // setImage(img);
+
+                imageVen.setImage(img);
+
+                imageVen.setFitWidth(131);
+                imageVen.setFitHeight(131);
+
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
 
     }
 
@@ -319,4 +382,38 @@ public class ProfileVen implements Initializable {
         }*/
 
 
+    @FXML
+    public void setImage(Image image) {
+        // set a clip to apply rounded border to the original image.
+
+/*
+        Rectangle clip = new Rectangle(
+                imageVen.getFitWidth(), imageVen.getFitHeight()
+        );
+        clip.setArcWidth(10);
+        clip.setArcHeight(10);
+        imageVen.setClip(clip);
+
+        // snapshot the rounded image.
+        SnapshotParameters parameters = new SnapshotParameters();
+        parameters.setFill(Color.TRANSPARENT);
+        //   WritableImage image = imageView.snapshot(parameters, null);
+
+        // remove the rounding clip so that our effect can show through.
+        imageVen.setClip(null);
+
+        // apply a shadow effect.
+        imageVen.setEffect(new DropShadow(20, Color.BLACK));
+
+        // store the rounded image in the imageView.
+      imageVen.setImage(image);
+
+        imageVen.setFitWidth(100);
+        imageVen.setFitHeight(100);
+  */  }
+
 }
+
+
+
+

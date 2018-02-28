@@ -18,27 +18,32 @@ import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
+import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
 
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
+import static Controller.LoginController.statPanier;
+
 public class CommandePaiement implements Initializable {
 
-    @FXML
-    private TableView<ArticleTableView> tableView;
-    @FXML
-    private TableColumn<ArticleTableView, String> nomTable;
+
 
     @FXML
-    private TableColumn<ArticleTableView, String> categorieTable;
+    private TableColumn<Article, String> colNom;
+    @FXML
+    private TableColumn<Article, String> colDesc;
+    @FXML
+    private TableColumn<Article, String> colCat;
+    @FXML
+    private TableColumn<Article, Integer> colPrix;
+    @FXML
+    private TableColumn<Article, Integer> colQte;
 
     @FXML
-    private TableColumn<ArticleTableView, String> DescriptionTable;
-
-    @FXML
-    private TableColumn<ArticleTableView, Number> prixTable;
+    private TableView<Article> listView;
 
     @FXML
     private JFXTextField adresseTxt;
@@ -71,8 +76,8 @@ public class CommandePaiement implements Initializable {
 
     public void initData(Commande commande) {
         this.commande = commande;
-        commandeDao.add(commande);
-        tableView.setItems(fillTable());
+
+
         float prix = commande.getPrix();
         ptLbl.setText(Float.toString(prix));
         tvaLbl.setText("18%");
@@ -86,10 +91,20 @@ public class CommandePaiement implements Initializable {
     public void initialize(URL location, ResourceBundle resources) {
         paimentCombo.getItems().addAll("Cheque", "Espece");
         livraisonCombo.getItems().addAll("Domicile", "Contact direct");
-        nomTable.setCellValueFactory(cellData -> cellData.getValue().nomProperty());
-        categorieTable.setCellValueFactory(cellData -> cellData.getValue().categorieProperty());
-        DescriptionTable.setCellValueFactory(cellData -> cellData.getValue().descriptionProperty());
-        prixTable.setCellValueFactory(cellData -> cellData.getValue().prixProperty());
+
+
+        ObservableList<Article> list = FXCollections.observableArrayList(statPanier.getArticleList());
+
+
+        colNom.setCellValueFactory(new PropertyValueFactory<>("nom"));
+        colDesc.setCellValueFactory(new PropertyValueFactory<>("description"));
+        colCat.setCellValueFactory(new PropertyValueFactory<>("categorie"));
+        colPrix.setCellValueFactory(new PropertyValueFactory<>("prix"));
+        colQte.setCellValueFactory(new PropertyValueFactory<>("order_qte"));
+
+        listView.setItems(list);
+
+
 
     }
 
@@ -98,6 +113,9 @@ public class CommandePaiement implements Initializable {
     void validerCommande(ActionEvent event) throws IOException {
         String paiment = paimentCombo.getValue();
         String liavraison = livraisonCombo.getValue();
+
+        commande.getPanier().setArticleList(statPanier.getArticleList());
+
         if (paiment == null) {
             errorLbl.setText("Veuillez saisir la methode de paiment");
         } else {
@@ -109,7 +127,8 @@ public class CommandePaiement implements Initializable {
                 commande.setMethode_livraison(liavraison);
                 commande.setMethode_paiment(paiment);
                 commande.setEtat(1);
-                commandeDao.update(commande);
+
+                commandeDao.add(commande);
 
                 FXMLLoader loader = new FXMLLoader();
                 loader.setLocation(getClass().getResource("/Rihab/View/Facture.fxml"));
@@ -125,13 +144,4 @@ public class CommandePaiement implements Initializable {
     }
 
 
-    private ObservableList<ArticleTableView> fillTable() {
-        ObservableList<ArticleTableView> articleData = FXCollections.observableArrayList();
-        for (Article a : commande.getPanier().getArticleList()) {
-
-            ArticleTableView article = new ArticleTableView(a);
-            articleData.add(article);
-        }
-        return articleData;
-    }
 }

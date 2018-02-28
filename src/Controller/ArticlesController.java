@@ -87,7 +87,6 @@ public class ArticlesController implements Initializable
 
     public void AllArticles()
     {
-        this.id = id;
 
         greadpane.setPadding(new Insets(15, 0, 5, 50));
         greadpane.setVgap(24);

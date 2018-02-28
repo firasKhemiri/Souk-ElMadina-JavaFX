@@ -7,7 +7,7 @@ package Model.Entities;
 
 import java.io.File;
 import java.sql.Blob;
-import java.util.Date;
+import java.sql.Date;
 
 /**
  *

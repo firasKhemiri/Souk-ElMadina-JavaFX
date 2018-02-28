@@ -26,6 +26,9 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.text.DecimalFormat;
+import java.time.LocalDate;
+import java.time.ZoneId;
+import java.util.Date;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -126,6 +129,8 @@ public class ModifierVenProfileController implements Initializable {
         txtNomBout.setText(vendeur.getNom_boutique());
         txtDescBout.setText(vendeur.getDescription());
 
+        dob.setValue(vendeur.getBirthday().toLocalDate());
+
         if (vendeur.getGender().equals("Male"))
         {
             rdMale.setSelected(true);
@@ -185,6 +190,12 @@ public class ModifierVenProfileController implements Initializable {
 
         vendeur.setNom_boutique(txtNomBout.getText());
         vendeur.setDescription(txtDescBout.getText());
+
+
+        LocalDate localDate = dob.getValue();
+        Date dateFromPicker = Date.from(localDate.atStartOfDay(ZoneId.systemDefault()).toInstant());
+
+        vendeur.setBirthday(new java.sql.Date( dateFromPicker.getTime()));
 
         //  a.setBirthday(dob.get);
 

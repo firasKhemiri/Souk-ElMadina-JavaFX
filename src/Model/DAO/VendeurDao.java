@@ -83,6 +83,7 @@ public class VendeurDao {
             r.setAdresse(res.getString("adresse"));
             r.setPhone(res.getString("phone"));
             r.setGender(res.getString("gender"));
+            r.setBirthday(res.getDate("birthday"));
 
             r.setNom_boutique(res.getString("nom_boutique"));
             r.setNote(res.getInt("note"));
@@ -221,10 +222,13 @@ public class VendeurDao {
             r.setPassword(res.getString("password"));
             r.setGender(res.getString("gender"));
             r.setPhone(res.getString("phone"));
+            r.setBirthday(res.getDate("birthday"));
 
             r.setNom_boutique(res.getString("nom_boutique"));
             r.setNote(res.getInt("note"));
             r.setDescription(res.getString("description"));
+            r.setType(res.getString("type"));
+
 
             System.out.println(res.getInt("id") + " " + res.getString("nom_boutique"));
         }
@@ -386,7 +390,7 @@ public class VendeurDao {
 
                     PreparedStatement st =
                             con.prepareStatement("UPDATE user SET username = ? , username_canonical = ?, password = ? ,  email = ?  , email_canonical = ? " +
-                                    ", nom = ? , prenom = ? , adresse = ? , photoProf = ? , phone = ? , gender = ? WHERE  (((id)='" + p.getId() + "'))");
+                                    ", nom = ? , prenom = ? , adresse = ? , photoProf = ? , phone = ? , gender = ? , birthday = ?  WHERE  (((id)='" + p.getId() + "'))");
                     st.setString(1, p.getUsername());
                     st.setString(2, p.getUsername());
                     st.setString(3, p.getPassword());
@@ -398,6 +402,7 @@ public class VendeurDao {
                     st.setBinaryStream(9, fin, len);
                     st.setString(10, p.getPhone());
                     st.setString(11, p.getGender());
+                    st.setDate(12, p.getBirthday());
 
                     if (st.executeUpdate() > 0) {
                         //recupérer le numéro sequentiel données par le SGBD
@@ -419,7 +424,7 @@ public class VendeurDao {
 
                     PreparedStatement st =
                             con.prepareStatement("UPDATE user SET username = ? , username_canonical = ?, password = ? ,  email = ?  , email_canonical = ? " +
-                                    ", nom = ? , prenom = ? , adresse = ? , phone = ? , gender = ? WHERE  (((id)='" + p.getId() + "'))");
+                                    ", nom = ? , prenom = ? , adresse = ? , phone = ? , gender = ? , birthday = ? WHERE  (((id)='" + p.getId() + "'))");
                     st.setString(1, p.getUsername());
                     st.setString(2, p.getUsername());
                     st.setString(3, p.getPassword());
@@ -430,6 +435,8 @@ public class VendeurDao {
                     st.setString(8, p.getAdresse());
                     st.setString(9, p.getPhone());
                     st.setString(10, p.getGender());
+                    st.setDate(11, p.getBirthday());
+
 
                     if (st.executeUpdate() > 0) {
 
@@ -518,6 +525,84 @@ public class VendeurDao {
             e.printStackTrace();
         }
         return false;
+    }
+
+
+
+    public int subCount(int id)
+    {
+
+        Connection con = connecter();
+        int i = 0;
+
+        String requete = "SELECT * FROM abonnements WHERE vendeur_id = ?";
+        try
+
+        {
+            PreparedStatement ps = con.prepareStatement(requete);
+
+            ps.setInt(1, id);
+
+            ResultSet resultat = ps.executeQuery();
+            while (resultat.next()) {
+                i++;
+            }
+            return i;
+        } catch (
+                SQLException e)
+
+        {
+            e.printStackTrace();
+        }
+        return i;
+    }
+
+
+
+    public List<User> selectSubs(int id)
+    {
+
+        Connection con = connecter();
+        int i = 0;
+        User r;
+        ArrayList<User> users = new ArrayList<>();
+
+        String requete = "SELECT * FROM user u JOIN abonnements a ON a.acheteur_id=u.id" +
+                " WHERE vendeur_id = ?";
+        try
+
+        {
+            PreparedStatement ps = con.prepareStatement(requete);
+
+            ps.setInt(1, id);
+
+            ResultSet res = ps.executeQuery();
+            while (res.next()) {
+                r = new User();
+
+                r.setId(res.getInt("id"));
+                r.setUsername(res.getString("username"));
+                r.setNom(res.getString("nom"));
+                r.setPrenom(res.getString("prenom"));
+                r.setEmail(res.getString("email"));
+                r.setPhotoprof(res.getBlob("photoprof"));
+                r.setAdresse(res.getString("adresse"));
+                r.setPhone(res.getString("phone"));
+                r.setGender(res.getString("gender"));
+
+                r.setBirthday(res.getDate("birthday"));
+
+                users.add(r);
+            }
+            return users;
+
+        } catch (
+                SQLException e)
+
+        {
+            e.printStackTrace();
+        }
+        return users;
     }
 }
 

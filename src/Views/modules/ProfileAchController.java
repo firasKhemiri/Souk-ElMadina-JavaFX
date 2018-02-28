@@ -56,8 +56,8 @@ import static Controller.LoginController.statPanier;
  */
 public class ProfileAchController implements Initializable {
 
-    @FXML
-    private Label lblType;
+    public Label lblBirthdate;
+    public Label lblGender;
     @FXML
     private Label lblName;
     @FXML
@@ -116,12 +116,14 @@ public class ProfileAchController implements Initializable {
 
         lblName.setText(ach.getNom()+" "+ach.getPrenom());
         lblEmail.setText(ach.getEmail());
-        lblType.setText(ach.getType());
         lblPhone.setText(ach.getPhone());
-        lblType.setText(ach.getType());
 
         lblAdresse.setText(ach.getAdresse());
         lblUsername.setText(ach.getUsername());
+
+        lblBirthdate.setText(String.valueOf(ach.getBirthday()));
+
+        lblGender.setText(ach.getGender());
 
 
         if (ach.getPhotoprof() != null)
@@ -130,7 +132,12 @@ public class ProfileAchController implements Initializable {
                 byte byteImage[];
                 byteImage = blob.getBytes(1,(int)blob.length());
                 Image img = new Image(new ByteArrayInputStream(byteImage));
-                setImage(img);
+             //   setImage(img);
+
+                imageView.setImage(img);
+                imageView.setFitWidth(131);
+                imageView.setFitHeight(131);
+
 
             } catch (SQLException e) {
                 e.printStackTrace();
@@ -208,13 +215,37 @@ public class ProfileAchController implements Initializable {
     @FXML
     private void goCart()
     {
-        System.out.println("panier ");
 
         try {
-            /*
-            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("../Views/modules/CompteVen.fxml"));
-            node = fxmlLoader.load();
-*/
+            Stage dashboardStage = new Stage();
+            dashboardStage.setTitle("");
+
+            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("../../Rihab/View/Panier.fxml"));
+
+            Parent root = fxmlLoader.load();
+
+            PanierController panierController = fxmlLoader.getController();
+            panierController.intiData(statPanier);
+
+            Scene scene = new Scene(root);
+            dashboardStage.setScene(scene);
+            dashboardStage.show();
+
+            FadeTransition ft = new FadeTransition(Duration.millis(1500));
+            ft.setNode(root);
+            ft.setFromValue(0.1);
+            ft.setToValue(1);
+            ft.setCycleCount(1);
+            ft.setAutoReverse(false);
+            ft.play();
+
+        } catch (IOException ex) {
+            Logger.getLogger(ProfileAchController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+
+      /*  try {
+
             Scene scene = imageView.getParent().getScene();
 
             FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("../../Rihab/View/Panier.fxml"));
@@ -223,8 +254,6 @@ public class ProfileAchController implements Initializable {
 
             scene.setRoot(root);
 
-          /*  ArticleDetails controller = fxmlLoader.getController();
-            controller.setArticle(article.getId());*/
 
             PanierController panierController = fxmlLoader.getController();
             panierController.intiData(statPanier);
@@ -241,7 +270,7 @@ public class ProfileAchController implements Initializable {
 
         } catch (IOException e) {
             e.printStackTrace();
-        }
+        }*/
     }
 
 
@@ -304,7 +333,7 @@ public class ProfileAchController implements Initializable {
 
 
     @FXML
-    public void setImage(Image image) {
+    public void setImage(Image image) {/*
         // set a clip to apply rounded border to the original image.
         Rectangle clip = new Rectangle(
                 imageView.getFitWidth(), imageView.getFitHeight()
@@ -325,7 +354,7 @@ public class ProfileAchController implements Initializable {
         imageView.setEffect(new DropShadow(20, Color.BLACK));
 
         // store the rounded image in the imageView.
-        imageView.setImage(image);
+        imageView.setImage(image);*/
     }
 
 }

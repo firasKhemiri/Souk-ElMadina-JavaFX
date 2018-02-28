@@ -151,7 +151,7 @@ public class Commande {
     public float getPrix() {
         float prix = 0;
         for (Article article : panier.getArticleList()) {
-            prix += article.getPrix();
+            prix += article.getPrix() * article.getOrder_qte();
         }
         return prix;
     }

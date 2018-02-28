@@ -50,7 +50,7 @@ public class UserDAO {
 
                     PreparedStatement st =
                             con.prepareStatement("INSERT INTO USER ( username, username_canonical , password, email " +
-                                    ", email_canonical,type_utilisateur,nom,prenom,phone,gender,adresse,photoprof)  values (?,?,?,?,?,?,?,?,?,?,?,?)");
+                                    ", email_canonical,type_utilisateur,nom,prenom,phone,gender,adresse,photoprof,birthday)  values (?,?,?,?,?,?,?,?,?,?,?,?,?)");
                     st.setString(1, p.getUsername());
                     st.setString(2, p.getUsername());
                     st.setString(3, p.getPassword());
@@ -63,6 +63,8 @@ public class UserDAO {
                     st.setString(10, p.getGender());
                     st.setString(11, p.getAdresse());
                     st.setBinaryStream(12, fin, len);
+
+                    st.setDate(12, p.getBirthday());
                     status = st.executeUpdate();
 
                 }
@@ -181,6 +183,7 @@ public class UserDAO {
                     r.setEmail(res.getString("email"));
                     r.setPhotoprof(res.getBlob("photoprof"));
                     r.setAdresse(res.getString("adresse"));
+                    r.setBirthday(res.getDate("birthday"));
 
                     acheteurs.add(r);
                 }
@@ -220,6 +223,7 @@ public class UserDAO {
                     r.setEmail(res.getString("email"));
                     r.setPhotoprof(res.getBlob("photoprof"));
                     r.setAdresse(res.getString("adresse"));
+                    r.setBirthday(res.getDate("birthday"));
 
 
                     //  System.out.println(res.getInt("id")+" "+res.getString("adresse"));
@@ -264,6 +268,7 @@ public class UserDAO {
                     r.setPassword(res.getString("password"));
                     r.setGender(res.getString("gender"));
                     r.setPhone(res.getString("phone"));
+                    r.setBirthday(res.getDate("birthday"));
 
                     //  System.out.println(res.getInt("id")+" "+res.getString("adresse"));
 
@@ -345,6 +350,7 @@ public class UserDAO {
                     r.setType(res.getString("type_utilisateur"));
                     r.setAdresse(res.getString("adresse"));
                     r.setPhone(res.getString("phone"));
+                    r.setBirthday(res.getDate("birthday"));
 
                     users.add(r);
                 }
@@ -377,6 +383,7 @@ public class UserDAO {
                     r.setEmail(res.getString("email"));
                     r.setPhotoprof(res.getBlob("photoprof"));
                     r.setType(res.getString("type_utilisateur"));
+                    r.setBirthday(res.getDate("birthday"));
 
                     if (r.getType().equals("vendeur")) {
                         requete = "SELECT *"
@@ -484,7 +491,7 @@ public class UserDAO {
 
                     PreparedStatement st =
                             con.prepareStatement("UPDATE user SET username = ? , username_canonical = ?, password = ? ,  email = ?  , email_canonical = ? " +
-                                    ", nom = ? , prenom = ? , adresse = ? , photoProf = ? , phone = ? , gender = ? WHERE  (((id)='" + p.getId() + "'))");
+                                    ", nom = ? , prenom = ? , adresse = ? , photoProf = ? , phone = ? , gender = ? , birthday = ? WHERE  (((id)='" + p.getId() + "'))");
                     st.setString(1, p.getUsername());
                     st.setString(2, p.getUsername());
                     st.setString(3, p.getPassword());
@@ -496,6 +503,7 @@ public class UserDAO {
                     st.setBinaryStream(9, fin, len);
                     st.setString(10, p.getPhone());
                     st.setString(11, p.getGender());
+                    st.setDate(12, p.getBirthday());
 
 
                     if (st.executeUpdate() > 0) {
@@ -513,7 +521,7 @@ public class UserDAO {
 
                     PreparedStatement st =
                             con.prepareStatement("UPDATE user SET username = ? , username_canonical = ?, password = ? ,  email = ?  , email_canonical = ? " +
-                                    ", nom = ? , prenom = ? , adresse = ? , phone = ? , gender = ? WHERE  (((id)='" + p.getId() + "'))");
+                                    ", nom = ? , prenom = ? , adresse = ? , phone = ? , gender = ? , birthday = ? WHERE  (((id)='" + p.getId() + "'))");
                     st.setString(1, p.getUsername());
                     st.setString(2, p.getUsername());
                     st.setString(3, p.getPassword());
@@ -524,6 +532,7 @@ public class UserDAO {
                     st.setString(8, p.getAdresse());
                     st.setString(9, p.getPhone());
                     st.setString(10, p.getGender());
+                    st.setDate(11, p.getBirthday());
 
 
                     if (st.executeUpdate() > 0) {

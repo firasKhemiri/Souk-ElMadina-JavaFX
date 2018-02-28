@@ -24,6 +24,9 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.text.DecimalFormat;
+import java.time.LocalDate;
+import java.time.ZoneId;
+import java.util.Date;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -413,6 +416,11 @@ public class RegisterController implements Initializable {
         statCuser.setNom_boutique(txtNomBout.getText());
         statCuser.setDescription(txtDescBout.getText());
 
+        LocalDate localDate = dob.getValue();
+        Date dateFromPicker = Date.from(localDate.atStartOfDay(ZoneId.systemDefault()).toInstant());
+
+        statCuser.setBirthday(new java.sql.Date( dateFromPicker.getTime()));
+
         //  a.setBirthday(dob.get);
 
 
@@ -421,14 +429,7 @@ public class RegisterController implements Initializable {
             System.out.println(file+" FILE");
 
             statCuser.setFile(file);
-            /*
-            int status = userdao.uploadPic(file);
 
-            if (status > 0) {
-                System.out.println("success");
-            } else {
-                System.out.println("failure");
-            }*/
         }
 
         if(userdao.Ajouter(statCuser))
